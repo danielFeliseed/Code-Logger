@@ -24,17 +24,33 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() 
     {
-        //
+        // $posts = Post::create([
+        //     'user_id' => $request->user()->id,
+        //     'body' => $request->body,
+        // ]);
+        // return Inertia::render('Dashboard', [
+        //     'post' => $post
+        // ]);
     }
+   
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'body' => 'required',
+        ]);
+
+        $post = Post::create([
+            'user_id' => $request->user()->id,
+            'body' => $request->body,
+        ]);
+
+        return redirect()->back();
     }
 
     /**
