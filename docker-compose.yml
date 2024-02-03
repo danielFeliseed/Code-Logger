@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mysql:
+    platform: linux/x86_64
+    build: ./docker/mysql/
+    volumes:
+      - ./docker/mysql/db:/docker-entrypoint-initdb.d # SQLファイルからデータ生成
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    platform: linux/x86_64
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+    links:
+      - mysql
+    ports:
+      - 8001:80
+    volumes:
+      - /sessions
