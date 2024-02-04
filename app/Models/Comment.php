@@ -9,12 +9,14 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function post(): belongsTo
     {
         return $this->belongsTo(Post::class);
     }
 
-    public function user(): belongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

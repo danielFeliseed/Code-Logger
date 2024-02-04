@@ -3,10 +3,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import Post from '../Components/Post.vue';
 import StatusCommentBox from '../Components/StatusCommentBox.vue';
-import { ref, watch } from 'vue';
+
 
 const props = defineProps({
-    posts: Array
+    posts: Array,
+    user: Object
 });
 
 </script>
@@ -26,7 +27,7 @@ const props = defineProps({
                 <StatusCommentBox />
             </div>
             <div class=" justify-center" v-for="post in posts" :key="post.id">
-                <Post :post="post" />
+                <Post :post="post" :user="user" />
 
             </div>
         </div>

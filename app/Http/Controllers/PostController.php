@@ -13,9 +13,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['comments','user'])->get();
+        $posts = Post::with(['comments','user', 'comments.user'])->get();
         return Inertia::render('Dashboard', [
-            'posts' => $posts
+            'posts' => $posts,
+            'user' => auth()->user(),
         ]);
      }
 

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+
+   
+
     public function sendMail(){
         echo "Mail sent"; // dont really use echo in Laravel
     }

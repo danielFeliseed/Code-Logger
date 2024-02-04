@@ -31,7 +31,7 @@ const submitForm = () => {
             <textarea v-model="form.body" type="text" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-200 focus:ring-0 dark:text-black dark:placeholder-gray-400" placeholder="Write a post..." required></textarea>
         </div>
         <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-300">
-            <button type="submit" :disabled="form.processing" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-red-800 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-black">
+            <button type="submit" :disabled="form.processing" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-gray-600 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-black">
                 Post
             </button>
             <div class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
