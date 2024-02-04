@@ -13,12 +13,10 @@ class PostController extends Controller
      */
     public function index()
     {
-            $posts = Post::with(['comments','user'])->get();
-            
-            return Inertia::render('Dashboard', [
-                'posts' => $posts
-            ]);
-        
+        $posts = Post::with(['comments','user'])->get();
+        return Inertia::render('Dashboard', [
+            'posts' => $posts
+        ]);
      }
 
     /**
@@ -46,11 +44,11 @@ class PostController extends Controller
         ]);
 
         $post = Post::create([
-            'user_id' => $request->user()->id,
+            'user_id' => auth()->user()->id,
             'body' => $request->body,
         ]);
 
-        return redirect()->back();
+        return to_route('posts.show',$post->id);
     }
 
     /**
@@ -58,7 +56,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return Inertia::render('Posts/Show', [
+            'post' => $post
+        ]);
     }
 
     /**
@@ -74,7 +74,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validated = $request->validate([
+            'body' => 'required',
+        ]);
+
+        $post->update($validated);
+
+        return to_route('dashboard');
     }
 
     /**
@@ -82,6 +88,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->back();
     }
 }

@@ -2,21 +2,20 @@
 import { ref } from 'vue';
 import {useForm} from '@inertiajs/vue3';
 
-defineProps({
-    post: Object,
-    comment: Object
-    
-});
-
-
 
 const form = useForm({
     body: ''
 });
 
 const submitForm = () => {
-    form.post(`/post/store/${post.id}`);
+    form.post(route("posts.store"),{
+        onSuccess: () => {
+            form.reset();
+        }
+    });
 };
+
+// POST: posting data (usually CREATING something) -> no ID yet
 
 
 </script>
@@ -28,12 +27,12 @@ const submitForm = () => {
 <form @submit.prevent="submitForm">
     <div class="w-[600px] mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-200 dark:border-gray-200">
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-200">
-            <label for="comment" class="sr-only">Your comment</label>
-            <textarea v-model="form.body" type="text" id="comment" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-200 focus:ring-0 dark:text-black dark:placeholder-gray-400" placeholder="Write a comment..." required></textarea>
+            <label for="post" class="sr-only">Your post</label>
+            <textarea v-model="form.body" type="text" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-200 focus:ring-0 dark:text-black dark:placeholder-gray-400" placeholder="Write a post..." required></textarea>
         </div>
         <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-300">
             <button type="submit" :disabled="form.processing" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-red-800 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-black">
-                Post comment
+                Post
             </button>
             <div class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
                 <button type="button" class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
