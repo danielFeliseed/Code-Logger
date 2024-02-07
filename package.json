@@ -16,5 +16,15 @@
         "tailwindcss": "^3.2.1",
         "vite": "^5.0.0",
         "vue": "^3.4.0"
+    },
+    "dependencies": {
+        "@codemirror/lang-html": "^6.4.8",
+        "@codemirror/lang-javascript": "^6.2.1",
+        "@codemirror/lang-json": "^6.0.1",
+        "@codemirror/theme-one-dark": "^6.1.2",
+        "codemirror": "^5.65.16",
+        "codemirror-editor-vue3": "^2.4.1",
+        "simple-code-editor": "^2.0.9",
+        "vue-codemirror": "^6.1.1"
     }
 }
