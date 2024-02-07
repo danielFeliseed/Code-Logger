@@ -4,7 +4,6 @@ import {useForm} from '@inertiajs/vue3';
 let dropdownHidden = ref(true);
 let editMode = ref(false);
 
-
 const props = defineProps({
     post: Object,
     comment: Object,

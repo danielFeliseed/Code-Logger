@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {useForm} from '@inertiajs/vue3';
+import {useForm, usePage} from '@inertiajs/vue3';
+import Form from '@/Components/Form.vue';
 
 let props = defineProps({
     user: Object,
@@ -12,6 +13,7 @@ const form = useForm({
     body: '',
     post_id: ''
 });
+const page = usePage();
 
 // route("posts.destroy", post.id.value) -> /posts/138
 
@@ -19,26 +21,18 @@ const toggleEdit = () => {
     editMode.value = !editMode.value;
 };
 
-// const update = () => {
-//     form.put(route("posts.update", props.post?.id), {
-//         onSuccess: () => {
-//             console.log("Post updated");
-//             editMode.value = false;
-//         }
-//     });
-// };
-
-let postComment = () => {
-    form.post(route("posts.comments.store", props.posts.id), {
+const update = () => {
+    form.put(route("posts.update", props.post?.id), {
         onSuccess: () => {
-            console.log("Comment posted");
-            form.reset();
+            console.log("Post updated");
+            editMode.value = false;
         }
-    })
-}
+    });
+};
+
 // Cant get comment to work on show profile page because the post id is not being passed to the form
 
-
+console.log(page.props.auth.user);
 </script>
 
 <template>
@@ -83,18 +77,10 @@ let postComment = () => {
                     new Date(post.created_at).toLocaleDateString() + ' ' +
                     new Date(post.created_at).getHours() + ':' +
                     new Date(post.created_at).getMinutes().toString().padStart(2, '0')
-                }}</span>
+            }}</span>
             <p   class="text-xs italic font-normal py-2.5 text-gray-900 dark:text-white">{{ comment.body }}</p>
         </div> 
-        <form @submit.prevent="postComment" >
-            <button v-if="user_id == user.id" @click="toggleEdit">Edit</button>
-            <div class="flex flex-col border rounded-md mt-2 px-2 min-w-[500px]">
-                <textarea v-model="form.body" name="postComment" id="postComment" cols="30" rows="4" class=" border-none rounded-md mt-2"></textarea>
-                <button @click="() => postComment(post)" class=" rounded-md mt-2 text-white border self-center w-1/4 mb-2">Comment</button>
-            </div>
-            <button @click="update" v-if="editMode" class="border border-white rounded-md mt-1">Save Changes</button>
-            <button v-if="user_id == user.id" class="border border-white rounded-md mt-1" @click="deletePost">Delete</button>
-        </form>
+        <Form :post_id="post.id"  />
     </div>
  </div>
 </div>

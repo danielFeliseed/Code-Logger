@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class CommentController extends Controller
 {
@@ -26,18 +27,17 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post) // We needed the Post $post parameter to get the post_id
     {
 
         
         $request->validate([
             'body' => 'required',
-            'post_id' => 'required',
         ]);
         
         $comment = Comment::create([
             'user_id' => auth()->user()->id,
-            'post_id' => $request->post_id,
+            'post_id' => $post->id,
             'body' => $request->body,
         ]);
         return redirect()->back();
