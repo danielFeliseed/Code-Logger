@@ -9,16 +9,13 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="themes.css" />
-        <link rel="stylesheet" href="themes-base16.css" />
-        <link rel="stylesheet" href="simple-code-editor.css" />
+        
 
         <!-- Scripts -->
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
-        <script src="highlight.min.js"></script>
-        <script src="simple-code-editor.js"></script>
+        
     </head>
     <body class="font-sans antialiased">
         @inertia

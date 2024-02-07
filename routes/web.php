@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DeckController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
     
 
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/decks', [DeckController::class, 'index'])->name('decks');
 });
 
 require __DIR__.'/auth.php';

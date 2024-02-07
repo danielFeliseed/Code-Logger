@@ -67,7 +67,7 @@ defineProps({
             </div>
 
             <div>
-                <h1 class="text-6xl mt-3 shadow-md">Welcome to CodeLogger</h1>
+                <h1 class="text-6xl mt-3 shadow-md text-zinc-950">Welcome to CodeLogger</h1>
             </div>
            
         </div>
