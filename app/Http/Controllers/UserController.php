@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function show(User $user)
     {
-        $user = User::with(['posts', 'posts.comments', 'posts.comments.user'])->find($user->id);
+        $user = User::with(['posts', 'posts.comments', 'posts.comments.user', ])->find($user->id);
         return Inertia::render('Users/Show', [
             'user' => $user,
             'posts' => $user->posts,

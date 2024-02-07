@@ -8,7 +8,36 @@ let props = defineProps({
     comments: Array
 });
 
-console.log(props);
+const form = useForm({
+    body: '',
+    post_id: ''
+});
+
+// route("posts.destroy", post.id.value) -> /posts/138
+
+const toggleEdit = () => {
+    editMode.value = !editMode.value;
+};
+
+// const update = () => {
+//     form.put(route("posts.update", props.post?.id), {
+//         onSuccess: () => {
+//             console.log("Post updated");
+//             editMode.value = false;
+//         }
+//     });
+// };
+
+let postComment = () => {
+    form.post(route("posts.comments.store", props.posts.id), {
+        onSuccess: () => {
+            console.log("Comment posted");
+            form.reset();
+        }
+    })
+}
+// Cant get comment to work on show profile page because the post id is not being passed to the form
+
 
 </script>
 
@@ -30,26 +59,42 @@ console.log(props);
 
        
 <div class=" flex flex-col items-center">
-    <div v-for="post in props.posts" class="flex items-start gap-2.5 mb-5">
+    <div v-for="post in props.posts" :key="post.id" class="flex items-start gap-2.5 mb-5">
         <img class="w-16 h-16 rounded-full" src="/Dadlettuce.jpeg" alt="Jese image">
-        <div class="flex flex-col w-full max-w-[520px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-xl dark:bg-red-800">
+        <div class="flex flex-col w-full max-w-[520px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-xl dark:bg-gray-500">
        <div class="flex items-center space-x-2 rtl:space-x-reverse">
-            <a :href="route('users.show', props.user.id)" class="text-sm font-semibold text-gray-900 dark:text-white">
-                {{ props.user.name }}
-            </a>
-            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{post.created_at}}</span>
+        <span  class="text-lg font-semibold text-gray-900 dark:text-white">
+                {{user.name }}
+        </span>
+            <span class="text-sm font-normal text-white ">{{ 
+                 new Date(post.created_at).toLocaleDateString() + ' ' +
+                 new Date(post.created_at).getHours() + ':' +
+                 new Date(post.created_at).getMinutes().toString().padStart(2, '0')
+            }}</span>
        </div>
        <div>
        
        <p  class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{{ post.body }}</p>
        
         </div>
-        <div v-for="comment in post.comments " class="border rounded-md px-2 mt-3">
+        <div v-for="comment in post.comments " :key="comment.id" class="border rounded-md px-2 mt-3">
+            <span class="text-white font-semibold mr-5">{{ comment.user.name }}</span>
+            <span class="text-white text-xs">{{ 
+                    new Date(post.created_at).toLocaleDateString() + ' ' +
+                    new Date(post.created_at).getHours() + ':' +
+                    new Date(post.created_at).getMinutes().toString().padStart(2, '0')
+                }}</span>
             <p   class="text-xs italic font-normal py-2.5 text-gray-900 dark:text-white">{{ comment.body }}</p>
         </div> 
-        <!-- <button @click="toggleEdit">Edit</button>
-        <button @click="update" v-if="editMode">Save Changes</button>
-        <button @click="deletePost">Delete</button> -->
+        <form @submit.prevent="postComment" >
+            <button v-if="user_id == user.id" @click="toggleEdit">Edit</button>
+            <div class="flex flex-col border rounded-md mt-2 px-2 min-w-[500px]">
+                <textarea v-model="form.body" name="postComment" id="postComment" cols="30" rows="4" class=" border-none rounded-md mt-2"></textarea>
+                <button @click="() => postComment(post)" class=" rounded-md mt-2 text-white border self-center w-1/4 mb-2">Comment</button>
+            </div>
+            <button @click="update" v-if="editMode" class="border border-white rounded-md mt-1">Save Changes</button>
+            <button v-if="user_id == user.id" class="border border-white rounded-md mt-1" @click="deletePost">Delete</button>
+        </form>
     </div>
  </div>
 </div>
