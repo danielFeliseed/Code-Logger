@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/decks', [DeckController::class, 'index'])->name('decks');
+    Route::get('/decks/{deck}', [DeckController::class, 'show'])->name('decks.show');
 });
 
 require __DIR__.'/auth.php';

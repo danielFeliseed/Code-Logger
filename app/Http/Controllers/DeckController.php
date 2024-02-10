@@ -11,14 +11,14 @@ class DeckController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Decks');
+        return Inertia::render('Decks', );
 
     }
 
     public function show($deck)
     {
         return Inertia::render('Decks/Show', [
-            'deck' => $deck,
+            
         ]);
     }
 
