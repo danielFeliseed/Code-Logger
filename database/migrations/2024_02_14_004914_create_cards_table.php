@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
+use App\Models\Deck;
 
 return new class extends Migration
 {
@@ -13,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
+            $table->string('front');
+            $table->text('back')->nullable();
+            $table->foreignId('deck_id')->constrained();
+            $table->integer('position')->default(0);
+            $table->softDeletes();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
