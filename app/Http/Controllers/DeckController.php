@@ -46,6 +46,7 @@ class DeckController extends Controller
         $request->validate([
             'name' => 'required',
             'category_id' => 'required',
+            
         ]);
         $decks = Deck::create([
             'user_id' => $request->user()->id,
@@ -54,7 +55,7 @@ class DeckController extends Controller
             'color' => $request->color,
             'category_id' => $request->category_id,
         ]);
-        return to_route('decks.show', $decks->id);
+        return to_route('decks', $decks->id);
     }
 
     public function edit($deck)

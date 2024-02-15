@@ -10,9 +10,7 @@ import CardForm from '../Components/CardForm.vue';
 
 
 const props = defineProps({
-   posts: Array,
    user: Object,
-   CodeEditor: Object
 });
 
 </script>

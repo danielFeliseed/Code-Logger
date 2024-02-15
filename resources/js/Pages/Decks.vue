@@ -1,38 +1,58 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import {usePage} from '@inertiajs/vue3'
+
+const page = usePage();
+
+const props = defineProps({
+    user: Object,
+    decks: Array,
+});
+const decks = props.decks;
+const showToolTip = false;
+
+console.log(page.props);
 </script>
 
-<template>
+<template >
 
     <AuthenticatedLayout>
+        <div class="mt-5"></div>
+    <Link href="/dashboard" class=" button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Back to Card Creator</Link>
+    <div class=" grid grid-cols-3">
+        <div v-for="deck in decks"  class="flex flex-col md:grid md:grid-cols-3 items-center mx-auto mt-5">
 
-    <div class="flex flex-col items-center mx-auto mt-5">
-
-        <Link href="/dashboard" class=" button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Back to Card Creator</Link>
-
-        <div class="flex flex-col md:grid md:grid-cols-3 gap-10 mt-10 ml-10"> 
-            <Link href="/decks/show" class=" border-2 border-white bg-slate-900 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
-                <span class=" text-2xl font-semibold text-red-700">Laravel</span>
-            </Link>
-            <Link href="/decks/show" class=" border-2 border-white bg-green-700 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
-                <span class=" text-2xl font-semibold text-white">Vue.js</span>
-            </Link>
-            <Link href="/decks/show" class=" border-2 border-white hover:text-yellow-400 bg-yellow-400 hover:shadow-2xl rounded-md hover:bg-black  w-[300px] h-[300px] text-center flex items-center justify-center">
-                <span class=" text-2xl font-semibold text-black">JavaScript</span>
-            </Link>
-            <Link href="/decks/show" class=" border-2 border-white bg-purple-950 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
-                <span class=" text-2xl font-semibold text-white">PHP</span>
-            </Link>
-            <Link href="/decks/show" class=" border-2 border-white bg-blue-900 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
-                <span class=" text-2xl font-semibold text-gray-400">SQL</span>
-            </Link>
-            <Link href="/decks/show" class=" border-2 border-white bg-orange-600 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
-                <span class=" text-2xl font-semibold text-white">Svelte</span>
-            </Link>
+            <div  class="flex flex-col md:grid md:grid-cols-3 gap-10 mt-10 ml-10"> 
+                
+                <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class=" border-2 border-white bg-${deck.color} hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
+                    <span class=" text-2xl font-semibold text-red-700">{{ deck.name }}</span>
+                </Link>
+                
+                
+                <!-- <Link href="/decks/show" class=" border-2 border-white bg-green-700 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
+                    <span class=" text-2xl font-semibold text-white">Vue.js</span>
+                </Link>
+                <Link href="/decks/show" class=" border-2 border-white hover:text-yellow-400 bg-yellow-400 hover:shadow-2xl rounded-md hover:bg-black  w-[300px] h-[300px] text-center flex items-center justify-center">
+                    <span class=" text-2xl font-semibold text-black">JavaScript</span>
+                </Link>
+                <Link href="/decks/show" class=" border-2 border-white bg-purple-950 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
+                    <span class=" text-2xl font-semibold text-white">PHP</span>
+                </Link>
+                <Link href="/decks/show" class=" border-2 border-white bg-blue-900 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
+                    <span class=" text-2xl font-semibold text-gray-400">SQL</span>
+                </Link>
+                <Link href="/decks/show" class=" border-2 border-white bg-orange-600 hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
+                    <span class=" text-2xl font-semibold text-white">Svelte</span>
+                </Link> -->
+                
+            </div>
+            
         </div>
+            
+        
     </div>
-
+    
     </AuthenticatedLayout>
 
 </template>
