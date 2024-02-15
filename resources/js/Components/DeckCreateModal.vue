@@ -1,9 +1,38 @@
 <script setup>
+import {useForm, usePage} from '@inertiajs/vue3';
+
+const form = useForm({
+    name: '',
+    color: '',
+    category: '',
+    description: ''
+});
+const page = usePage();
+
+const postDeck = () => {
+    form.post(route('decks.store'), {
+        onSuccess: () => {
+            console.log("Deck posted");
+            form.reset();
+        },
+        onError: () => {
+            console.log(form.errors);
+        }
+    })
+}
 
 const closeModal = () => {
     const modal = document.getElementById('crud-modal')
     modal.hidden = !modal.hidden;
 }
+
+const props = defineProps({
+    name: String,
+    color: String,
+    category: String,
+    description: String
+});
+
 
 </script>
 

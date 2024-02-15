@@ -38,16 +38,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    Route::post('/posts/store', [PostController::class, 'store'])->name('posts.store');
-    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
-    Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
-    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    // Route::post('/posts/store', [PostController::class, 'store'])->name('posts.store');
+    // Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+    // Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+    // Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+    // Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
     
 
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/decks', [DeckController::class, 'index'])->name('decks');
     Route::get('/decks/{deck}', [DeckController::class, 'show'])->name('decks.show');
+    Route::post('/dashboard', [DeckController::class, 'store'])->name('decks.store');
 });
 
 require __DIR__.'/auth.php';
