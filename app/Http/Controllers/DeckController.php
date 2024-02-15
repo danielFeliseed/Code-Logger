@@ -18,6 +18,12 @@ class DeckController extends Controller
             'decks' => $decks,
             'user' => auth()->user()
         ]);
+
+        $decks = Deck::with('cards')->get();
+        return Inertia::render('Dashboard', [
+            'decks' => auth()->user()->decks,
+            'user' => auth()->user(),
+        ]);
     }
 
     public function show($deck)

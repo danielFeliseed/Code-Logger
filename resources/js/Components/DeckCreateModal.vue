@@ -26,6 +26,7 @@ console.log(page.props);
 const closeModal = () => {
     const modal = document.getElementById('crud-modal')
     modal.hidden = !modal.hidden;
+    
 }
 
 const props = defineProps({
@@ -46,9 +47,9 @@ const props = defineProps({
 
 <!-- Main modal -->
 <div id="crud-modal" hidden="true" tabindex="-1" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full">
+    <div class="relative p-4 w-full max-w-md  max-h-full">
         <!-- Modal content -->
-        <div class="relative p-4 w-full max-w-md max-h-full bg-slate-900 rounded-lg shadow ">
+        <div class="relative p-4 w-full max-w-md  max-h-full bg-slate-900 rounded-lg shadow ">
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">

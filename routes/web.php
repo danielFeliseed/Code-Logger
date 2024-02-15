@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\CardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/decks', [DeckController::class, 'index'])->name('decks');
     Route::get('/decks/{deck}', [DeckController::class, 'show'])->name('decks.show');
     Route::post('/dashboard', [DeckController::class, 'store'])->name('decks.store');
+    Route::post('/cards/store', [CardController::class, 'store'])->name('cards.store');
 });
 
 require __DIR__.'/auth.php';
