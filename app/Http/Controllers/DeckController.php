@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Deck;
+use App\Models\Card;
 
 
 
@@ -12,7 +14,7 @@ class DeckController extends Controller
     public function index()
     {
         $decks = Deck::with('cards')->get();
-        return Inertia::render('Decks', 'Dashboard', [
+        return Inertia::render('Decks', [
             'decks' => $decks,
             'user' => auth()->user()
         ]);
