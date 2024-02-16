@@ -16,20 +16,18 @@ class DeckController extends Controller
         $decks = Deck::with('cards')->get();
         return Inertia::render('Decks', [
             'decks' => $decks,
-            'user' => auth()->user()
-        ]);
-
-        $decks = Deck::with('cards')->get();
-        return Inertia::render('Dashboard', [
-            'decks' => auth()->user()->decks,
             'user' => auth()->user(),
         ]);
     }
 
-    public function show($deck)
+    public function show(Deck $deck)
     {
         
-        return Inertia::render('Decks/Show');
+        $deck = Deck::with('cards')->find($deck->id);
+        return Inertia::render('Decks/Show', [
+            'cards' => $deck->cards,
+            'deck' => $deck,
+        ]);
     }
 
     public function create() 

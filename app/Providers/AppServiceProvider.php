@@ -14,7 +14,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         inertia::share('decks', function () {
-            return auth()->user()->decks;
+            return auth()?->user()?->decks;
+        });
+
+        inertia::share('user', function () {
+            return auth()?->user();
+        });
+
+        inertia::share('cards', function () {
+            return auth()?->user()?->cards;
         });
     }
     public function register(): void

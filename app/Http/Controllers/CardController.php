@@ -11,8 +11,12 @@ use App\Models\Deck;
 class CardController extends Controller
 {
     public function index()
-    {
-        return Inertia::render('Cards');
+    {   
+        $cards = Card::with('cards')->get();
+        return Inertia::render('Decks/Show', [
+            'cards' => $cards,
+            'user' => auth()->user()
+        ]);
     }
 
     public function show($card)

@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/auth/redirect', [AuthenticatedSessionController::class, 'redirectToProvider'])->name('login.google');
+Route::get('/auth/google/callback', [AuthenticatedSessionController::class, 'handleProviderCallback']);
 
 Route::get('/dashboard', [PostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
