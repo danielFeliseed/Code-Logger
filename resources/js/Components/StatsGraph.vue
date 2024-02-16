@@ -1,5 +1,12 @@
 <script setup>
+import { ref } from 'vue';
+import ApexCharts from 'apexcharts';
 
+const progressGraph = ref(false);
+
+const toggleProgressGraph = () => {
+    progressGraph.value = !progressGraph.value;
+}
 
 window.addEventListener("load", function() {
     const getChartOptions = () => {
@@ -29,7 +36,7 @@ window.addEventListener("load", function() {
             },
           },
           grid: {
-            show: false,
+            show: true,
             strokeDashArray: 4,
             padding: {
               left: 2,
@@ -109,11 +116,12 @@ window.addEventListener("load", function() {
             <dd class="text-blue-600 dark:text-blue-300 text-sm font-medium">Done</dd>
         </dl>
         </div>
-        <button data-collapse-toggle="more-details" type="button" class="hover:underline text-xs text-gray-500 dark:text-gray-400 font-medium inline-flex items-center">Show more details <svg class="w-2 h-2 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+
+        <button @click.prevent="toggleProgressGraph()"  data-collapse-toggle="more-details" type="button" class='hover:underline text-xs text-gray-500 dark:text-gray-400 font-medium inline-flex items-center'>Show more details <svg class="w-2 h-2 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
         </svg>
         </button>
-        <div id="more-details" class="border-gray-200 border-t dark:border-gray-600 pt-3 mt-3 space-y-2 hidden">
+        <div  id="more-details" class="border-gray-200 border-t dark:border-gray-600 pt-3 mt-3 space-y-2 hidden">
         <dl class="flex items-center justify-between">
             <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal">Average task completion rate:</dt>
             <dd class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-green-900 dark:text-green-300">
