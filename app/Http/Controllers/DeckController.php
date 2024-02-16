@@ -15,7 +15,7 @@ class DeckController extends Controller
     {
         $decks = Deck::with('cards')->get();
         return Inertia::render('Decks', [
-            'decks' => $decks,
+            'decks' => auth()->user()->decks,
             'user' => auth()->user(),
         ]);
     }
@@ -74,5 +74,11 @@ class DeckController extends Controller
     {
         $deck->update($request->all());
         return to_route('decks.show', $deck->id);
+    }
+
+    public function destroy(Deck $deck)
+    {
+        $deck->delete();
+        return to_route('decks');
     }
 }

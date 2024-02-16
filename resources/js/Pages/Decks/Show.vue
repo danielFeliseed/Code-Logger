@@ -3,9 +3,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ref } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 
+
 const page = usePage();
 const cards = ref(page.props.cards);
 const deckName = ref(page.props.deck.name);
+const cardDisplays = ref(true);
 
 let showFrontOfCard = ref(true);
 let showBackOfCard = ref(false);
@@ -16,6 +18,7 @@ let toggleReviewButton = ref(true);
 function toggleCardsAndReviewButton() {
     toggleCards.value = !toggleCards.value;
     toggleReviewButton.value = !toggleReviewButton.value;
+    cardDisplays.value = !cardDisplays.value;
 }
 
 const flipCard = () => {
@@ -34,7 +37,7 @@ console.log(page.props);
             <h1 class="text-gray-200 text-2xl">Cards in {{ deckName }}</h1>
             <button v-show="toggleReviewButton" @click="toggleCardsAndReviewButton()" class=" bg-slate-950 hover:bg-black rounded py-1 px-5 text-gray-200">Review cards</button>
         </div>
-        <ul class="grid grid-cols-3 justify-center items-center">
+        <ul v-show="cardDisplays" class="grid grid-cols-3 justify-center items-center">
             <li class=" bg-slate-950 hover:bg-black text-white text-center border rounded-lg p-2 mt-7 pt-10 w-[300px] h-28" v-for="card in cards">{{ card.front }}</li>
         </ul>
     </div>

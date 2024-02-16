@@ -5,7 +5,8 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+
 
 defineProps({
     canResetPassword: {
@@ -14,6 +15,7 @@ defineProps({
     status: {
         type: String,
     },
+    
 });
 
 const form = useForm({
@@ -27,6 +29,9 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+
+
 </script>
 
 <template >
@@ -84,6 +89,9 @@ const submit = () => {
                 >
                     Forgot your password?
                 </Link>
+                <a href="/auth/redirect" class="  text-green-700 rounded-lg px-2 py-1 ml-1">
+                    Log in with Google
+                </a>
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in

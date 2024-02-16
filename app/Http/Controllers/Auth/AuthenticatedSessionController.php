@@ -47,6 +47,7 @@ class AuthenticatedSessionController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('google')->user();
+        
     }
 
 
