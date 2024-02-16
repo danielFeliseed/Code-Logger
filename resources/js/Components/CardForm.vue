@@ -10,6 +10,8 @@ const form = useForm({
 });
 const page = usePage();
 const decks = ref(page.props.decks);
+const drawerVisible = ref(false);
+const modalVisible = ref(false);
 
 const postCard = (deckId) => {
       form.deck_id = deckId;
@@ -26,26 +28,18 @@ const postCard = (deckId) => {
     })
 }
 
+const toggleDrawer = () => {
+   console.log(drawerVisible.value);
+   drawerVisible.value = !drawerVisible.value;
+   console.log(drawerVisible.value);
+}
 
-
-
-const show = () => {
-   const drawer = document.getElementById('drawer-swipe');
-   drawer.classList.toggle('translate-y-full');
-   window.addEventListener('click', (e) => {
-  
-   });
-  
-};
-
-const showModal = () => {
-   const modal = document.getElementById('crud-modal');
-    modal.hidden = !modal.hidden;
-    window.addEventListener('click', (e) => {
-   });
-};
-
-
+const toggleModal = () => {
+   if(drawerVisible.value) {
+      drawerVisible.value = false;
+   }
+   modalVisible.value = !modalVisible.value;
+}
 
 </script>
 
@@ -61,7 +55,7 @@ const showModal = () => {
          <textarea v-model="form.back" type="text" id="default-input" class=" h-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> </textarea>
       </div>
       <div class="text-center">
-               <button @click="show()"
+               <button @click.prevent="toggleDrawer()"
                   class="text-white bg-slate-900 hover:bg-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 mb-2   focus:outline-none "
                   type="button" data-drawer-target="drawer-swipe" data-drawer-show="drawer-swipe"
                   data-drawer-placement="bottom" data-drawer-edge="true" data-drawer-edge-offset="bottom-[60px]"
@@ -70,18 +64,18 @@ const showModal = () => {
                </button>
       </div>
       </div>
-   <DeckCreateModal />
+   <DeckCreateModal :modalVisible="modalVisible" />
 
    <div id="drawer-swipe"
-               class="fixed z-40 w-full overflow-y-auto border-t border-gray-200 rounded-t-lg dark:border-gray-700 bg-slate-950 transition-transform bottom-0 left-0 right-0 translate-y-full "
+               :class="{'translate-y-full': !drawerVisible, 'fixed z-40 w-full overflow-y-auto border-t border-gray-200 rounded-t-lg dark:border-gray-700 bg-slate-950 transition-transform bottom-0 left-0 right-0': true}"
                tabindex="-1" aria-labelledby="drawer-swipe-label">
                <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700" data-drawer-toggle="drawer-swipe">
                   <span
                      class="absolute w-8 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-3 left-1/2 dark:bg-gray-600"></span>
                   <button id="drawer-swipe-label"
-                     @click.prevent="showModal()"
+                     @click.prevent="toggleModal()"
                         class="inline-flex items-center text-base text-gray-500 dark:text-gray-400 font-medium"><svg
-                        class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        class="w-4 h-4 me-2"  xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                         viewBox="0 0 18 18">
                         <path
                            d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10ZM17 13h-2v-2a1 1 0 0 0-2 0v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 0 0 2 0v-2h2a1 1 0 0 0 0-2Z" />

@@ -21,7 +21,7 @@ const postDeck = () => {
         }
     })
 }
-console.log(page.props);
+
 
 const closeModal = () => {
     const modal = document.getElementById('crud-modal')
@@ -33,7 +33,11 @@ const props = defineProps({
     name: String,
     color: String,
     category: String,
-    description: String
+    description: String,
+    modalVisible: {
+        type: Boolean,
+        default: false
+    }
 });
 
 
@@ -46,7 +50,7 @@ const props = defineProps({
 <!-- Modal toggle -->
 
 <!-- Main modal -->
-<div id="crud-modal" hidden="true" tabindex="-1" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div v-show="modalVisible" id="crud-modal" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md  max-h-full">
         <!-- Modal content -->
         <div class="relative p-4 w-full max-w-md  max-h-full bg-slate-900 rounded-lg shadow ">
