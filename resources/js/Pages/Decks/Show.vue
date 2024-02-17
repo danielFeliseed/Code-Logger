@@ -109,7 +109,7 @@ const goToNextCard = () => {
                 <div id="front-of-card" v-show="showFrontOfCard" class="flex justify-center items-center mt-16">
                     <div class="  border-2 border-b-2 border-gray-700 bg-gray-900 hover:shadow-xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-between">
-                            <p class=" text-gray-200 font-semibold mx-5 py-3">Card 1 of 20</p>
+                            <p class=" text-gray-200 font-semibold mx-5 py-3">Card {{ currentCard }} of {{ cards.length }}</p>
                             <p class=" text-gray-200 font-semibold mx-5 py-3">Time elapsed: 06</p>
                         </div>
                         <div class=" bg-zinc-950 border-t-2 border-b-2 mt-[60px] h-3/4 text-center flex items-center justify-center">
