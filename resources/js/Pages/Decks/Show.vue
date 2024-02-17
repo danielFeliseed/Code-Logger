@@ -12,7 +12,8 @@ const cardDisplays = ref(true);
 
 let showFrontOfCard = ref(true);
 let showBackOfCard = ref(false);
-
+let currentCard = ref(0);
+let showCompletionMessage = ref(false);
 let toggleCards = ref(false);
 let toggleReviewButton = ref(true);
 let showCardDetails = ref(false);
@@ -45,7 +46,17 @@ const flipCard = () => {
     showBackOfCard.value = !showBackOfCard.value;
 }
 
-console.log(page.props);
+const goToNextCard = () => {
+    if (currentCard.value < cards.value.length -1) {
+        showFrontOfCard.value = !showFrontOfCard.value;
+        showBackOfCard.value = !showBackOfCard.value;
+        currentCard.value++;
+    } else {
+        toggleCards.value = !toggleCards.value;
+        showCompletionMessage.value = !showCompletionMessage.value;
+    }
+}
+
 </script>
 
 <template>
@@ -66,6 +77,13 @@ console.log(page.props);
                 <button class="text-white border bg-slate-800 hover:bg-red-800 px-1 rounded-b-sm w-[150px]">Delete</button>
             </ul>
         </div>
+
+        <div v-show="showCompletionMessage" class=" flex justify-center mt-16">
+            <div class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-10 text-center bg-slate-950 w-[450px]" >
+                <h1 class="text-3xl text-gray-200">You have completed the review, Great job!</h1>
+                <Link href="/dashboard" class="text-white border bg-slate-800 hover:bg-black px-1 mt-3 rounded-lg w-[150px]">Back to dashboard</Link>
+            </div>
+        </div>
     
 
         <div v-show="showCardDetails" class=" flex justify-center mt-16">
@@ -80,12 +98,12 @@ console.log(page.props);
                     {{ cardDetailsToBeShown.back }}
                 </div>
                 <div>
-                    <button @click="toggleCardDetails" class="text-white border bg-slate-800 hover:bg-black px-1 mt-3 rounded-b-sm w-[150px]">Close</button>
+                    <button @click="toggleCardDetails" class="text-white border bg-slate-800 hover:bg-black px-1 mt-3 rounded-lg w-[150px]">Close</button>
                 </div>
             </div>
         </div>
 
-        <div class="mx-7 flex flex-col items-center justify-center">
+        <div  class="mx-7 flex flex-col items-center justify-center">
             <div v-show="toggleCards">
                 <transition name="slide-fade">
                 <div id="front-of-card" v-show="showFrontOfCard" class="flex justify-center items-center mt-16">
@@ -95,7 +113,7 @@ console.log(page.props);
                             <p class=" text-gray-200 font-semibold mx-5 py-3">Time elapsed: 06</p>
                         </div>
                         <div class=" bg-zinc-950 border-t-2 border-b-2 mt-[60px] h-3/4 text-center flex items-center justify-center">
-                            <p class=" text-gray-200">What does MVC stand for in Laravel?</p>
+                            <p class=" text-gray-200">{{ cards[currentCard]?.front }}</p>
                         </div>
                         <button @click="flipCard" class=" w-1/3 text-gray-200 bg-slate-800 hover:bg-green-700 h-16 border-r-2">Easy</button>
                         <button @click="flipCard" class=" w-1/3 text-gray-200 bg-slate-800 hover:bg-yellow-700 h-16 border-r-2">Medium</button>
@@ -105,15 +123,15 @@ console.log(page.props);
                 </transition>
                 
                 <transition name="slide-fade">
-                <div v-show="showBackOfCard" id="back-of-card" class=" justify-center items-center">
+                <div v-show="showBackOfCard" id="back-of-card" class="flex justify-center items-center mt-16">
                     <div class="  border-2 border-b-2 border-white bg-slate-950 hover:shadow-2xl hover:w-[405px] hover:h-[505px] rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-center items-center">
                             <p class=" text-gray-200 font-semibold mx-5 mt-14 text-sm">It took you 8 seconds to answer</p>
                         </div>
                         <div class=" bg-zinc-950 border-t-2 border-b-2 mt-[60px] h-3/4 text-center flex items-center justify-center">
-                            <p class=" text-gray-200">Model View Controller</p>
+                            <p class=" text-gray-200">{{ cards[currentCard]?.back }}</p>
                         </div>
-                        <button @click="flipCard" id="next-card-button" class=" w-full text-gray-200 bg-slate-800 h-16 border-r-2">Next card</button>
+                        <button @click="goToNextCard" id="next-card-button" class=" w-full text-gray-200 bg-slate-800 h-16 border-r-2">Next card</button>
                     </div>
                 </div>
                 </transition>
@@ -127,19 +145,19 @@ console.log(page.props);
 <style>
 
 .slide-fade-enter-active, .slide-fade-leave-active {
-  transition: all 0.3s ease;
+  transition: transform 0.5s ease-out, opacity 0.4s ease-out;
 }
 .slide-fade-enter-from, .slide-fade-leave-to {
-  transform: translateX(100%);
+  transform: translateY(100%);
   opacity: 0;
 }
 .slide-fade-enter-to, .slide-fade-leave-from {
-  transform: translateX(0);
-  opacity: 1;
+  transform: translateY(30);
+  opacity: 0.4;
 }
 
 #next-card-button {
-    background: linear-gradient(to right, #000000 50%, #010b1c 50%);
+    background: linear-gradient(to right, #2b2b2b 50%, #030016 50%);
     background-size: 200% 100%;
     background-position: right bottom;
     transition: all 1s ease-out;
