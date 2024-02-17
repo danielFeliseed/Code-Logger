@@ -107,7 +107,7 @@ const goToNextCard = () => {
             <div v-show="toggleCards">
                 <transition name="slide-fade">
                 <div id="front-of-card" v-show="showFrontOfCard" class="flex justify-center items-center mt-16">
-                    <div class="  border-2 border-b-2 border-gray-700 bg-gray-900 hover:shadow-xl hover:w-[405px] hover:h-[505px] rounded-md  w-[400px] h-[500px]">
+                    <div class="  border-2 border-b-2 border-gray-700 bg-gray-900 hover:shadow-xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-between">
                             <p class=" text-gray-200 font-semibold mx-5 py-3">Card 1 of 20</p>
                             <p class=" text-gray-200 font-semibold mx-5 py-3">Time elapsed: 06</p>
@@ -115,23 +115,24 @@ const goToNextCard = () => {
                         <div class=" bg-zinc-950 border-t-2 border-b-2 mt-[60px] h-3/4 text-center flex items-center justify-center">
                             <p class=" text-gray-200">{{ cards[currentCard]?.front }}</p>
                         </div>
-                        <button @click="flipCard" class=" w-1/3 text-gray-200 bg-slate-800 hover:bg-green-700 h-16 border-r-2">Easy</button>
-                        <button @click="flipCard" class=" w-1/3 text-gray-200 bg-slate-800 hover:bg-yellow-700 h-16 border-r-2">Medium</button>
-                        <button @click="flipCard" class=" w-1/3 text-gray-200 bg-slate-800 hover:bg-red-700 h-16">Hard</button>
+                        <button @click="flipCard" class=" w-full text-gray-200 bg-slate-800 hover:bg-gray-950 h-16">See Answer</button>
                     </div>
                 </div>
                 </transition>
                 
                 <transition name="slide-fade">
                 <div v-show="showBackOfCard" id="back-of-card" class="flex justify-center items-center mt-16">
-                    <div class="  border-2 border-b-2 border-white bg-slate-950 hover:shadow-2xl hover:w-[405px] hover:h-[505px] rounded-md  w-[400px] h-[500px]">
+                    <div class="  border-2 border-b-2 border-white bg-slate-950 hover:shadow-2xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-center items-center">
                             <p class=" text-gray-200 font-semibold mx-5 mt-14 text-sm">It took you 8 seconds to answer</p>
                         </div>
                         <div class=" bg-zinc-950 border-t-2 border-b-2 mt-[60px] h-3/4 text-center flex items-center justify-center">
                             <p class=" text-gray-200">{{ cards[currentCard]?.back }}</p>
                         </div>
-                        <button @click="goToNextCard" id="next-card-button" class=" w-full text-gray-200 bg-slate-800 h-16 border-r-2">Next card</button>
+                        <div class="flex">
+                            <button @click="goToNextCard" id="next-card-button" class=" w-full text-gray-200 bg-slate-800 hover:bg-black h-16 border-r-2">⭕️</button>
+                            <button @click="goToNextCard" id="next-card-button" class=" w-full text-gray-200 bg-slate-800 hover:bg-black h-16 border-r-2">❌</button>
+                        </div>
                     </div>
                 </div>
                 </transition>
@@ -156,7 +157,7 @@ const goToNextCard = () => {
   opacity: 0.4;
 }
 
-#next-card-button {
+/* #next-card-button {
     background: linear-gradient(to right, #2b2b2b 50%, #030016 50%);
     background-size: 200% 100%;
     background-position: right bottom;
@@ -165,7 +166,7 @@ const goToNextCard = () => {
 
 #next-card-button:hover {
     background-position: left bottom;
-}
+} */
 
 
 </style>

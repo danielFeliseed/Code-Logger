@@ -53,7 +53,7 @@ console.log(page.props);
                     </Link>
                 </div>
             </div>
-            <button @click="toggleDeleteModal(deck.id)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-gray-200 text-center self-center justify-center mr-6 border bg-slate-800 px-2 py-1 w-1/3 mt-3 rounded-md">Delete</button>
+            <button @click="toggleDeleteModal(deck.id)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-gray-200 hover:bg-red-800 text-center self-center justify-center mr-6 border bg-slate-800 px-2 py-1 w-1/3 mt-3 rounded-md">Delete</button>
         </div>
         <div v-show="showDeleteModal" id="popup-modal" tabindex="-3" class=" overflow-y-auto overflow-x-hidden relative z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class=" p-4 w-full max-w-md max-h-full">
