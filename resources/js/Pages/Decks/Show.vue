@@ -16,6 +16,8 @@ let currentCard = ref(0);
 let showCompletionMessage = ref(false);
 let toggleCards = ref(false);
 let toggleReviewButton = ref(true);
+let timer = ref(null);
+let secondsTaken = ref(0);
 let showCardDetails = ref(false);
 let cardDetailsToBeShown = ref(
     {
@@ -29,6 +31,7 @@ function toggleCardsAndReviewButton() {
     toggleCards.value = !toggleCards.value;
     toggleReviewButton.value = !toggleReviewButton.value;
     cardDisplays.value = !cardDisplays.value;
+    startTimer();
 }
 
 function toggleCardDetails(card = null) {
@@ -44,18 +47,38 @@ function toggleCardDetails(card = null) {
 const flipCard = () => {
     showFrontOfCard.value = !showFrontOfCard.value;
     showBackOfCard.value = !showBackOfCard.value;
+    if (showBackOfCard.value) {
+        stopTimer();
+    } else {
+        startTimer();
+    }
 }
 
 const goToNextCard = () => {
+
+    stopTimer();
     if (currentCard.value < cards.value.length -1) {
         showFrontOfCard.value = !showFrontOfCard.value;
         showBackOfCard.value = !showBackOfCard.value;
         currentCard.value++;
+        startTimer();
     } else {
         toggleCards.value = !toggleCards.value;
         showCompletionMessage.value = !showCompletionMessage.value;
     }
 }
+
+const startTimer = () => {
+    secondsTaken.value = 0;
+    timer.value = setInterval(() => {
+        secondsTaken.value++;
+    }, 1000);
+}
+
+const stopTimer = () => {
+    clearInterval(timer.value);
+}
+
 
 </script>
 
@@ -109,8 +132,8 @@ const goToNextCard = () => {
                 <div id="front-of-card" v-show="showFrontOfCard" class="flex justify-center items-center mt-16">
                     <div class="  border-2 border-b-2 border-gray-700 bg-gray-900 hover:shadow-xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-between">
-                            <p class=" text-gray-200 font-semibold mx-5 py-3">Card {{ currentCard }} of {{ cards.length }}</p>
-                            <p class=" text-gray-200 font-semibold mx-5 py-3">Time elapsed: 06</p>
+                            <p class=" text-gray-200 font-semibold mx-5 py-3">Card {{ currentCard + 1 }} of {{ cards.length }}</p>
+                            <p class=" text-gray-200 font-semibold mx-5 py-3">Time elapsed: {{ secondsTaken }}</p>
                         </div>
                         <div class=" bg-zinc-950 border-t-2 border-b-2 mt-[60px] h-3/4 text-center flex items-center justify-center">
                             <p class=" text-gray-200">{{ cards[currentCard]?.front }}</p>
@@ -124,7 +147,7 @@ const goToNextCard = () => {
                 <div v-show="showBackOfCard" id="back-of-card" class="flex justify-center items-center mt-16">
                     <div class="  border-2 border-b-2 border-white bg-slate-950 hover:shadow-2xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-center items-center">
-                            <p class=" text-gray-200 font-semibold mx-5 mt-14 text-sm">It took you 8 seconds to answer</p>
+                            <p class=" text-gray-200 font-semibold mx-5 mt-14 text-sm">It took you {{ secondsTaken }} seconds to answer</p>
                         </div>
                         <div class=" bg-zinc-950 border-t-2 border-b-2 mt-[60px] h-3/4 text-center flex items-center justify-center">
                             <p class=" text-gray-200">{{ cards[currentCard]?.back }}</p>
