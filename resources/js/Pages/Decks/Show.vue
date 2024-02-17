@@ -2,6 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ref } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/inertia-vue3';
 
 
 const page = usePage();
@@ -34,12 +35,16 @@ console.log(page.props);
     
     <div class="mx-10 ">
         <div class=" flex justify-between mt-5 ">
-            <h1 class="text-gray-200 text-2xl">Cards in {{ deckName }}</h1>
+            <Link href="./" class="text-gray-200 text-2xl">Cards in {{ deckName }}</Link>
             <button v-show="toggleReviewButton" @click="toggleCardsAndReviewButton()" class=" bg-slate-950 hover:bg-black rounded py-1 px-5 text-gray-200">Review cards</button>
         </div>
-        <ul v-show="cardDisplays" class="grid grid-cols-3 justify-center items-center">
-            <li class=" bg-slate-950 hover:bg-black text-white text-center border rounded-lg p-2 mt-7 pt-10 w-[300px] h-28" v-for="card in cards">{{ card.front }}</li>
-        </ul>
+        <div class="grid grid-cols-3 justify-center items-center">
+            <ul v-show="cardDisplays" v-for="card in cards" >
+                <li class=" bg-slate-950 hover:bg-black text-white text-center border rounded-lg rounded-b-none p-2 mt-7 pt-10 w-[300px] h-28" >{{ card.front }}</li>
+                <button class="text-white border bg-slate-800 hover:bg-black px-1 rounded-b-sm w-[150px]">Details</button>
+                <button class="text-white border bg-slate-800 hover:bg-red-800 px-1 rounded-b-sm w-[150px]">Delete</button>
+            </ul>
+        </div>
     </div>
 
     <div class="mx-7 flex flex-col items-center justify-center">
