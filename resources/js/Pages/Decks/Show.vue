@@ -34,11 +34,15 @@ console.log(page.props);
     <AuthenticatedLayout>
     
     <div class="mx-10 ">
+        
         <div class=" flex justify-between mt-5 ">
             <Link href="./" class="text-gray-200 text-2xl">Cards in {{ deckName }}</Link>
-            <button v-show="toggleReviewButton" @click="toggleCardsAndReviewButton()" class=" bg-slate-950 hover:bg-black rounded py-1 px-5 text-gray-200">Review cards</button>
+            <button v-if="cards.length !== 0" v-show="toggleReviewButton" @click="toggleCardsAndReviewButton()" class=" bg-slate-950 hover:bg-black rounded py-1 px-5 text-gray-200">Review cards</button>
         </div>
-        <div class="grid grid-cols-3 justify-center items-center">
+        <div v-if="cards.length == 0" class="flex flex-col justify-center items-center ">
+            <h1 class="text-3xl text-gray-200 self-center justify-center text-center mt-28">No cards in this deck. <br> You can create them with the Card Creator</h1>
+        </div>
+        <div v-else class="grid grid-cols-3 justify-center items-center">
             <ul v-show="cardDisplays" v-for="card in cards" >
                 <li class=" bg-slate-950 hover:bg-black text-white text-center border rounded-lg rounded-b-none p-2 mt-7 pt-10 w-[300px] h-28" >{{ card.front }}</li>
                 <button class="text-white border bg-slate-800 hover:bg-black px-1 rounded-b-sm w-[150px]">Details</button>

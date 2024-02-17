@@ -48,7 +48,7 @@ console.log(page.props);
         <div v-for="deck in decks" :key="deck.id"  class=" flex flex-col">
             <div  class="flex flex-col md:grid md:grid-cols-3 items-center mx-auto mt-5">
                 <div  class="flex flex-col md:grid md:grid-cols-3 gap-10 mt-10 ml-10"> 
-                    <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class=" flex flex-col border-2 border-white bg-${deck.color} hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
+                    <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class=" flex flex-col border-2 border-white  hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
                         <span class=" text-2xl font-semibold text-gray-500">{{ deck.name }}</span>
                     </Link>
                 </div>
