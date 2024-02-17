@@ -126,9 +126,11 @@ const stopTimer = () => {
             </div>
         </div>
 
-        <div  class="mx-7 flex flex-col items-center justify-center">
-            <div v-show="toggleCards">
-                <transition name="slide-fade">
+        <div  class="  mx-7 flex flex-col items-center justify-center">
+            <div v-show="toggleCards" class="">
+                <transition name="slide-fade" position: absolute
+                :duration="{enter: 1000, leave: 650 }"> 
+               
                 <div id="front-of-card" v-show="showFrontOfCard" class="flex justify-center items-center mt-16">
                     <div class="  border-2 border-b-2 border-gray-700 bg-gray-900 hover:shadow-xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-between">
@@ -141,9 +143,10 @@ const stopTimer = () => {
                         <button @click="flipCard" class=" w-full text-gray-200 bg-slate-800 hover:bg-gray-950 h-16">See Answer</button>
                     </div>
                 </div>
+                
                 </transition>
                 
-                <transition name="slide-fade">
+                 <transition name="slide-fade" position: absolute> 
                 <div v-show="showBackOfCard" id="back-of-card" class="flex justify-center items-center mt-16">
                     <div class="  border-2 border-b-2 border-white bg-slate-950 hover:shadow-2xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-center items-center">
@@ -158,7 +161,7 @@ const stopTimer = () => {
                         </div>
                     </div>
                 </div>
-                </transition>
+                 </transition> 
             </div>
         </div>
     </div>
@@ -168,17 +171,35 @@ const stopTimer = () => {
 
 <style>
 
-.slide-fade-enter-active, .slide-fade-leave-active {
-  transition: transform 0.5s ease-out, opacity 0.4s ease-out;
+#front-of-card, #back-of-card {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-.slide-fade-enter-from, .slide-fade-leave-to {
-  transform: translateY(100%);
-  opacity: 0;
+
+.parent-container {
+    position: relative;
 }
-.slide-fade-enter-to, .slide-fade-leave-from {
-  transform: translateY(30);
-  opacity: 0.4;
+
+.slide-fade-enter-active {
+    transition: all 1s ease;
+    position:inherit;
 }
+
+.slide-fade-leave-active {
+    transition: all 1s ease;
+    position: absolute;
+}
+
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+    position: absolute;
+}
+
+
 
 /* #next-card-button {
     background: linear-gradient(to right, #2b2b2b 50%, #030016 50%);
