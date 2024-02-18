@@ -26,9 +26,7 @@ const props = defineProps({
       <div class=" flex flex-col mx-8">
 
          <div class=" items-center justify-center flex mt-7 gap-5">
-            <!-- <CodeEditor value="Type the code you want to add as an Anki card here" width="70%" height="500px"
-               class="code-editor" :line-nums="true" :tab-spaces="4" :lang-list-display="true"
-               :languages="[['JavaScript'], ['cpp', 'C++'], ['python', 'Python'], ['php', 'PHP']]" /> -->
+            <!--TODO: Fix the issue where the Create deck modal only opens once without reloading-->
             <CardForm class=" w-1/2" />
             <StatsGraph />
          </div>

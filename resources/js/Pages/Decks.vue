@@ -48,18 +48,21 @@ console.log(page.props);
         <div v-for="deck in decks" :key="deck.id"  class="mt-16 flex flex-col items-center justify-center">
             
             <div  class="stack"> 
-                <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class="text-center border border-base-content shadow-md card w-[300px] bg-base-100">
+                <!-- <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class="text-center border border-base-content shadow-md card w-[300px] bg-base-100">
                     <span class=" card-body text-2xl font-semibold text-gray-500">{{ deck.name }}</span>
+                </Link> -->
+                <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}"  class=" transform transition-transform duration-500 hover:rotate-12 text-center hover:shadow-2xl hover: flex items-center justify-center border border-base-content shadow-md card h-56 w-[300px] bg-base-100">
+                    <span class=" self-center text-center justify-center card-body font-extrabold text-3xl">{{ deck.name }}</span>
                 </Link>
-                <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class="text-center border border-base-content shadow card w-[300px] bg-base-100">
+                <Link :href="'/decks/' + deck.id" class="text-center border border-base-content shadow card h-56 w-[300px] bg-base-100">
                     <span class=" card-body">2</span>
                 </Link>
-                <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class="text-center border border-base-content shadow-sm card w-[300px] bg-base-100">
+                <Link :href="'/decks/' + deck.id"  class="text-center border border-base-content shadow-sm card h-56 w-[300px] bg-base-100">
                      <span class=" card-body">3</span>
                 </Link>
             </div>
             
-            <button @click="toggleDeleteModal(deck.id)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-gray-200 hover:bg-red-800 text-center border mx-auto bg-slate-800 px-2 py-1 w-1/3  mt-3 rounded-md">Delete</button>
+            <button @click="toggleDeleteModal(deck.id)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-gray-200 hover:bg-red-800 text-center border mx-auto bg-slate-800 px-2 py-1 w-1/3  mt-5 rounded-md">Delete</button>
         </div>
             <!-- Delete Modal -->
             <Transition :duration="550" />
