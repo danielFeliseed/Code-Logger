@@ -100,7 +100,7 @@ const stopTimer = () => {
                 <button class="text-white border bg-slate-800 hover:bg-red-800 px-1 rounded-b-sm w-[150px]">Delete</button>
             </ul>
         </div>
-
+        <!--Completion Message Modal-->
         <div v-show="showCompletionMessage" class=" flex justify-center mt-16">
             <div class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-10 text-center bg-slate-950 w-[450px]" >
                 <h1 class="text-3xl text-gray-200">You have completed the review, Great job!</h1>
@@ -108,11 +108,12 @@ const stopTimer = () => {
             </div>
         </div>
     
-
+        <!--Card Details Modal-->
+        <Transition :duration="{enter: 550, leave:550}" >
         <div v-show="showCardDetails" class=" flex justify-center mt-16">
             <div class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-10 text-center bg-slate-950 w-[450px]" >
                 <h1 class="text-3xl text-gray-200">Card details</h1>
-                <label class="text-gray-200 font-semibold text-lg" for="card-front">Front of card</label>
+                <label class=" text-gray-200 font-semibold text-lg" for="card-front">Front of card</label>
                 <div class=" text-gray-200 w-[400px] border rounded-lg py-3 px-3 bg-black">
                     {{ cardDetailsToBeShown.front }}
                 </div>
@@ -125,12 +126,15 @@ const stopTimer = () => {
                 </div>
             </div>
         </div>
+        </Transition>
 
+        <!--Review Cards Modal-->
         <div  class="  mx-7 flex flex-col items-center justify-center">
             <div v-show="toggleCards" class="">
                 <transition name="slide-fade" position: absolute
                 :duration="{enter: 1000, leave: 650 }"> 
                
+                <!--Front of card-->
                 <div id="front-of-card" v-show="showFrontOfCard" class="flex justify-center items-center mt-16">
                     <div class="  border-2 border-b-2 border-gray-700 bg-gray-900 hover:shadow-xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-between">
@@ -143,10 +147,10 @@ const stopTimer = () => {
                         <button @click="flipCard" class=" w-full text-gray-200 bg-slate-800 hover:bg-gray-950 h-16">See Answer</button>
                     </div>
                 </div>
-                
                 </transition>
                 
                  <transition name="slide-fade" position: absolute> 
+                <!--Back of card-->
                 <div v-show="showBackOfCard" id="back-of-card" class="flex justify-center items-center mt-16">
                     <div class="  border-2 border-b-2 border-white bg-slate-950 hover:shadow-2xl rounded-md  w-[400px] h-[500px]">
                         <div class="h-0 flex justify-center items-center">
@@ -199,6 +203,15 @@ const stopTimer = () => {
     position: absolute;
 }
 
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.6s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 
 
 /* #next-card-button {

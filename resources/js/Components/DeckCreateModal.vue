@@ -44,12 +44,13 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class=" flex justify-center items-start z-50">
+<div class=" flex justify-center items-start z-50">
 
 <div class="absolute  ">
 <!-- Modal toggle -->
 
 <!-- Main modal -->
+<!-- <Transition :duration="550" > -->
 <div v-show="modalVisible" id="crud-modal" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md  max-h-full">
         <!-- Modal content -->
@@ -99,7 +100,21 @@ const props = defineProps({
         </div>
     </div>
 </div> 
+<!-- </Transition> -->
 </div>
 
     </div>
 </template>
+
+<style>
+
+/* .v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+} */
+</style>
