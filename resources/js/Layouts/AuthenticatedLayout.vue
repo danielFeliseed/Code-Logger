@@ -6,12 +6,18 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
+
+const page = usePage();
+
 </script>
 
+
 <template>
-    <div>
+    
+    <div :key="$page.url">
         <div class="min-h-screen bg-zinc-950">
             <nav class="bg-slate-950 border-b border-zinc-800">
                 <!-- Primary Navigation Menu -->
@@ -147,9 +153,28 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main>
+            <transition name="page" mode="out-in" appear>
+            <main :key="page.url">
                 <slot />
             </main>
+            </transition>
         </div>
     </div>
+    
 </template>
+
+
+<style>
+
+
+.page-enter-active,
+    .page-leave-active {
+        transition: all .5s;
+    }
+
+    .page-enter,
+    .page-leave-active {
+        opacity: 0;
+    }
+
+</style>

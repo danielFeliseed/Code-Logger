@@ -45,16 +45,23 @@ console.log(page.props);
 <div class="mt-5"></div>
     <Link href="/dashboard" class=" button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Back to Card Creator</Link>
     <div class="grid grid-cols-3">
-        <div v-for="deck in decks" :key="deck.id"  class=" flex flex-col">
-            <div  class="flex flex-col md:grid md:grid-cols-3 items-center mx-auto mt-5">
-                <div  class="flex flex-col md:grid md:grid-cols-3 gap-10 mt-10 ml-10"> 
-                    <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class=" flex flex-col border-2 border-white  hover:shadow-2xl rounded-md hover:bg-black w-[300px] h-[300px] text-center flex items-center justify-center">
-                        <span class=" text-2xl font-semibold text-gray-500">{{ deck.name }}</span>
-                    </Link>
-                </div>
+        <div v-for="deck in decks" :key="deck.id"  class="mt-16 flex flex-col items-center justify-center">
+            
+            <div  class="stack"> 
+                <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class="text-center border border-base-content shadow-md card w-[300px] bg-base-100">
+                    <span class=" card-body text-2xl font-semibold text-gray-500">{{ deck.name }}</span>
+                </Link>
+                <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class="text-center border border-base-content shadow card w-[300px] bg-base-100">
+                    <span class=" card-body">2</span>
+                </Link>
+                <Link :href="'/decks/' + deck.id" :style="{backgroundColor: deck.color}" class="text-center border border-base-content shadow-sm card w-[300px] bg-base-100">
+                     <span class=" card-body">3</span>
+                </Link>
             </div>
-            <button @click="toggleDeleteModal(deck.id)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-gray-200 hover:bg-red-800 text-center self-center justify-center mr-6 border bg-slate-800 px-2 py-1 w-1/3 mt-3 rounded-md">Delete</button>
+            
+            <button @click="toggleDeleteModal(deck.id)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-gray-200 hover:bg-red-800 text-center border mx-auto bg-slate-800 px-2 py-1 w-1/3  mt-3 rounded-md">Delete</button>
         </div>
+        <!-- Delete Modal -->
         <div v-show="showDeleteModal" id="popup-modal" tabindex="-3" class=" overflow-y-auto overflow-x-hidden relative z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class=" p-4 w-full max-w-md max-h-full">
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
