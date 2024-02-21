@@ -29,9 +29,7 @@ const postCard = (deckId) => {
 }
 
 const toggleDrawer = () => {
-   console.log(drawerVisible.value);
    drawerVisible.value = !drawerVisible.value;
-   console.log(drawerVisible.value);
 }
 
 const toggleModal = () => {
