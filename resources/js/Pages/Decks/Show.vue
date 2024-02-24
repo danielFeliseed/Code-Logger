@@ -95,7 +95,7 @@ const stopTimer = () => {
         </div>
         <div v-else class=" flex flex-col lg:grid lg:grid-cols-3 justify-center items-center">
             <ul v-show="cardDisplays" v-for="card in cards" :key="card.id">
-                <li class=" bg-slate-950 hover:bg-black text-white text-center border rounded-lg rounded-b-none p-2 mt-7 pt-10 w-[300px] h-28" >{{ card.front }}</li>
+                <li class=" bg-slate-950 hover:bg-black text-white text-center border rounded-lg rounded-b-none p-2 mt-7 pt-10 w-[300px] h-32" >{{ card.front }}</li>
                 <button @click="toggleCardDetails(card)" class="text-white border bg-slate-800 hover:bg-black px-1 rounded-b-sm w-[150px]">Details</button>
                 <button class="text-white border bg-slate-800 hover:bg-red-800 px-1 rounded-b-sm w-[150px]">Delete</button>
             </ul>
@@ -114,11 +114,11 @@ const stopTimer = () => {
             <div class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-10 text-center bg-slate-950 w-[450px]" >
                 <h1 class="text-3xl text-gray-200">Card details</h1>
                 <label class=" text-gray-200 font-semibold text-lg" for="card-front">Front of card</label>
-                <div class=" text-gray-200 w-[400px] border rounded-lg py-3 px-3 bg-black">
+                <div class=" text-gray-200 w-[400px] border rounded-lg py-3 px-3 bg-black" style="white-space: pre-wrap;">
                     {{ cardDetailsToBeShown.front }}
                 </div>
                 <label class="text-gray-200 font-semibold text-lg" for="card-back">Back of card</label>
-                <div class=" text-gray-200  w-[400px] border rounded-lg py-3 px-3 bg-black">
+                <div class=" text-gray-200  w-[400px] border rounded-lg py-3 px-3 text-left bg-black" style="white-space: pre-wrap;">
                     {{ cardDetailsToBeShown.back }}
                 </div>
                 <div>

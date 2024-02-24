@@ -71,7 +71,12 @@ console.log(page.props);
                 </Link>
             </div>
             
-            <button @click="toggleDeleteModal(deck.id)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-gray-200 hover:bg-red-800 text-center border mx-auto bg-slate-800 px-2 py-1 w-1/3  mt-5 rounded-md">Delete</button>
+            <div class=" flex gap-3 mt-5 w-1/2 items-center">
+                <button @click="toggleDeleteModal(deck.id)" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class=" text-gray-200 hover:bg-red-800 text-center w-full border mx-auto bg-slate-800 px-2 py-1 rounded-md">Delete</button>
+                <div class="tooltip tooltip-bottom " :data-tip="deck.description">
+                    <button class="btn bg-slate-800 rounded-xl">?</button>
+                </div>
+            </div>
         </div>
             <!-- Delete Modal -->
             <Transition :duration="550" />
