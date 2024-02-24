@@ -110,7 +110,7 @@ const stopTimer = () => {
     
         <!--Card Details Modal-->
         <Transition :duration="{enter: 550, leave:550}" >
-        <div v-show="showCardDetails" class=" flex justify-center mt-16">
+        <div v-show="showCardDetails" class=" z-50 absolute top-20 right-0 left-0 flex justify-center mt-16">
             <div class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-10 text-center bg-slate-950 w-[450px]" >
                 <h1 class="text-3xl text-gray-200">Card details</h1>
                 <label class=" text-gray-200 font-semibold text-lg" for="card-front">Front of card</label>

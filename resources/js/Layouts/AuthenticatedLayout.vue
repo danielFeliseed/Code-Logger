@@ -122,7 +122,10 @@ const page = usePage();
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            News Feed
+                            Card Creator
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('decks')" :active="route().current('decks')">
+                            Decks
                         </ResponsiveNavLink>
                     </div>
 

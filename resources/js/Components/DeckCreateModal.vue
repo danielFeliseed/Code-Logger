@@ -12,7 +12,7 @@ const page = usePage();
 
 const postDeck = () => {
     if (form.name === '' || form.color === '' || form.category_id === '' || form.description === '') {
-        alert("Please fill in all fields and choose a color");
+        alert("Please fill in all fields and choose ");
         return;
     }
     form.post(route('decks.store'), {
@@ -52,12 +52,12 @@ const props = defineProps({
 <template>
 <div class=" flex justify-center items-start z-50">
 
-<div class="absolute  ">
+<div class="md:absolute ">
 <!-- Modal toggle -->
 
 <!-- Main modal -->
 <!-- <Transition :duration="550" > -->
-<div v-show="modalVisible" id="crud-modal" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div v-show="modalVisible" id="crud-modal" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden z-50 w-full mb-10 md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md  max-h-full">
         <!-- Modal content -->
         <div class="relative p-4 w-full max-w-md  max-h-full bg-slate-900 rounded-lg shadow ">
