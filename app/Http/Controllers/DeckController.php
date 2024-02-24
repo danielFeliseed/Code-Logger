@@ -59,7 +59,10 @@ class DeckController extends Controller
             'color' => $request->color,
             'category_id' => $request->category_id,
         ]);
+        return to_route('decks.show', $decks->id);
         return to_route('decks', $decks->id);
+        
+
     }
 
     public function edit($deck)

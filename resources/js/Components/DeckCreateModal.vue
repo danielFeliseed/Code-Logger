@@ -1,4 +1,5 @@
 <script setup>
+import Decks from '@/Pages/Decks.vue';
 import {useForm, usePage} from '@inertiajs/vue3';
 
 const form = useForm({
@@ -10,10 +11,15 @@ const form = useForm({
 const page = usePage();
 
 const postDeck = () => {
+    if (form.name === '' || form.color === '' || form.category_id === '' || form.description === '') {
+        alert("Please fill in all fields and choose a color");
+        return;
+    }
     form.post(route('decks.store'), {
         onSuccess: () => {
             console.log("Deck posted");
             form.reset();
+            
         },
         onError: () => {
             alert(form.errors)

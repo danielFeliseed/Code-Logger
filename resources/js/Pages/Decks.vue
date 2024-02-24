@@ -4,6 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import {usePage } from '@inertiajs/vue3'
 import { defineProps, ref } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
+import DeckCreateModal from '@/Components/DeckCreateModal.vue'
 
 
 
@@ -35,7 +36,11 @@ const toggleDeleteModal = (id = null) => {
     deckIdToDelete.value = id;
     showDeleteModal.value = !showDeleteModal.value;
 }
+let modalVisible = ref(false);
 
+const toggleDeckCreateModal = () => {
+    modalVisible.value = !modalVisible.value;
+}
 console.log(page.props);
 </script>
 
@@ -43,7 +48,11 @@ console.log(page.props);
 
 <AuthenticatedLayout>
 <div class="mt-5"></div>
-    <Link href="/dashboard" class=" button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Back to Card Creator</Link>
+    <div class=" flex justify-between mx-2">
+        <Link href="/dashboard" class=" button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Back to Card Creator</Link>
+        <button @click="toggleDeckCreateModal" class=" mr-3 button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Create a New Deck</button>
+    </div>
+    <DeckCreateModal class="relative" :modalVisible="modalVisible" />
     <div class="grid grid-cols-3">
         <div v-for="deck in decks" :key="deck.id"  class="mt-16 flex flex-col items-center justify-center">
             
@@ -89,6 +98,7 @@ console.log(page.props);
             </div>
             <Transition />
      </div>
+     <!-- <DeckCreateModal class="relative" :modalVisible="modalVisible" /> -->
 </div>
     
     </AuthenticatedLayout>
