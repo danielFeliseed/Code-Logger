@@ -111,9 +111,9 @@ const props = defineProps({
 
 @media (max-width: 640px) {
   #crud-modal {
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+    position: sticky;
+    top: 0;
+    
   }
 }
 

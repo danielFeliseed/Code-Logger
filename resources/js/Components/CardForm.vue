@@ -62,7 +62,7 @@ const toggleModal = () => {
                   </button>
          </div>
       </div>
-      <DeckCreateModal class="relative bottom-56" :modalVisible="modalVisible" />
+      <DeckCreateModal class=" sticky sm:relative top-0 bottom-56" :modalVisible="modalVisible" />
       
       <div id="drawer-swipe"
             :class="{'translate-y-full': !drawerVisible, 'fixed z-40 w-full overflow-y-auto border-t border-gray-200 rounded-t-lg dark:border-gray-700 bg-slate-950 transition-transform bottom-0 left-0 right-0': true}"
