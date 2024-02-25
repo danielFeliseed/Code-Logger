@@ -26,10 +26,11 @@ const page = usePage();
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo
+                                <Link class=" text-2xl font-semibold" :href="route('dashboard')">
+                                    <!-- <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-zinc-950"
-                                    />
+                                    /> -->
+                                    CodeLogger
                                 </Link>
                             </div>
 
