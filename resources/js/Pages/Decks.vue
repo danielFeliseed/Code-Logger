@@ -52,7 +52,7 @@ console.log(page.props);
         <Link href="/dashboard" class=" button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Back to Card Creator</Link>
         <button @click="toggleDeckCreateModal" class=" mr-3 button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Create a New Deck</button>
     </div>
-    <DeckCreateModal class="relative" :modalVisible="modalVisible" />
+    <DeckCreateModal class="relative top-56" :modalVisible="modalVisible" />
     <div class="md:grid md:grid-cols-3 pb-16 md:pb-0">
         <div v-for="deck in decks" :key="deck.id"  class="mt-16 flex flex-col items-center justify-center">
             
