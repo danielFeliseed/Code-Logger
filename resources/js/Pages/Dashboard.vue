@@ -1,7 +1,7 @@
 <script setup>
 import StatsGraph from '../Components/StatsGraph.vue';
 import CardForm from '../Components/CardForm.vue';
-
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 const props = defineProps({
    user: Object,
@@ -15,7 +15,7 @@ const props = defineProps({
 <template>
   
 
-  
+  <AuthenticatedLayout>
 
       <div class=" w-full flex flex-col items-center md:items-stretch md:mx-8">
 
@@ -28,6 +28,8 @@ const props = defineProps({
 
          
       </div>
+
+   </AuthenticatedLayout>
 
 
 </template>
