@@ -151,8 +151,8 @@ const stopTimer = () => {
                 
                  <transition name="slide-fade" position: absolute> 
                 <!--Back of card-->
-                <div v-show="showBackOfCard" id="back-of-card" class="flex justify-center items-center mt-16">
-                    <div class="  border-2 border-b-2 border-white bg-slate-950 hover:shadow-2xl rounded-md  w-[400px] h-[500px]">
+                <div  v-show="showBackOfCard" id="back-of-card" class="flex justify-center items-center mt-16">
+                    <div class="  border-2 border-b-2  bg-slate-950 hover:shadow-2xl rounded-md w-72  md:w-[400px] h-[500px]">
                         <div class="h-0 flex justify-center items-center">
                             <p class=" text-gray-200 font-semibold mx-5 mt-14 text-sm">It took you {{ secondsTaken }} seconds to answer</p>
                         </div>
