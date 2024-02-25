@@ -50,19 +50,15 @@ const props = defineProps({
 </script>
 
 <template>
-<div class="flex items-center  justify-center z-50">
-    <div class="absolute   bg-black backdrop-filter backdrop-blur-3xl">
-<!-- Modal toggle -->
-
-<!-- Main modal -->
-<!-- <Transition :duration="550" > -->
-<div v-show="modalVisible" id="crud-modal" aria-hidden="true" class="  overflow-y-auto overflow-x-hidden z-50 w-full mb-10 md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full bg-slate-900 rounded-lg border transition duration-500 ease-in-out transform hover:bg-slate-950 hover:shadow-lg z-10">
+<div class="flex items-center justify-center z-50">
+    <div class="absolute bg-black backdrop-filter backdrop-blur-3xl">
+    <div v-show="modalVisible" id="crud-modal" aria-hidden="true" class="w-screen h-screen overflow-y-auto overflow-x-hidden z-50 sm:w-full sm:h-auto mb-10 md:inset-0 max-h-full">
+        <div class="sticky sm:relative sm:p-4 w-full sm:max-h-full bg-slate-900 rounded-lg border transition duration-500 ease-in-out transform hover:bg-slate-950 hover:shadow-lg z-10">
         <!-- Modal content -->
-        <div class=" self-center relative p-4 w-full max-w-lg max-h-full bg-slate-900 rounded-lg border transition duration-500 ease-in-out transform hover:bg-slate-950 hover:shadow-lg ">
+        <div class=" self-center relative sm:p-4 w-full sm:max-h-full bg-slate-900 rounded-lg border transition duration-500 ease-in-out transform hover:bg-slate-950 hover:shadow-lg ">
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                <h3 class=" text-sm sm:text-lg font-semibold text-gray-900 dark:text-white">
                     Create New Deck
                 </h3>
                 <button @click="closeModal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
@@ -112,6 +108,14 @@ const props = defineProps({
 </template>
 
 <style>
+
+@media (max-width: 640px) {
+  #crud-modal {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+}
 
 /* .v-enter-active,
 .v-leave-active {

@@ -110,15 +110,15 @@ const stopTimer = () => {
     
         <!--Card Details Modal-->
         <Transition :duration="{enter: 550, leave:550}" >
-        <div v-show="showCardDetails" class=" z-50 absolute top-20 right-0 left-0 flex justify-center mt-16">
-            <div class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-10 text-center bg-slate-950 w-[450px]" >
+        <div v-show="showCardDetails" id="card-details" class=" z-50 absolute top-20 right-0 left-0 flex justify-center mt-16">
+            <div  class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-10 text-center bg-slate-950 sm:w-[450px]" >
                 <h1 class="text-3xl text-gray-200">Card details</h1>
                 <label class=" text-gray-200 font-semibold text-lg" for="card-front">Front of card</label>
-                <div class=" text-gray-200 w-[400px] border rounded-lg py-3 px-3 bg-black" style="white-space: pre-wrap;">
+                <div class=" text-gray-200 sm:w-[400px] border rounded-lg py-3 px-3 bg-black" style="white-space: pre-wrap;">
                     {{ cardDetailsToBeShown.front }}
                 </div>
                 <label class="text-gray-200 font-semibold text-lg" for="card-back">Back of card</label>
-                <div class=" text-gray-200  w-[400px] border rounded-lg py-3 px-3 text-left bg-black" style="white-space: pre-wrap;">
+                <div class=" text-gray-200  sm:w-[400px] border rounded-lg py-3 px-3 text-left bg-black" style="white-space: pre-wrap;">
                     {{ cardDetailsToBeShown.back }}
                 </div>
                 <div>
@@ -129,14 +129,14 @@ const stopTimer = () => {
         </Transition>
 
         <!--Review Cards Modal-->
-        <div  class="  mx-7 flex flex-col items-center justify-center">
+        <div id="review-modal"  class="  mx-7 flex flex-col items-center justify-center">
             <div v-show="toggleCards" class="">
                 <transition name="slide-fade" position: absolute
                 :duration="{enter: 1000, leave: 650 }"> 
                
                 <!--Front of card-->
                 <div id="front-of-card" v-show="showFrontOfCard" class="flex justify-center items-center mt-16">
-                    <div class="  border-2 border-b-2 border-gray-700 bg-gray-900 hover:shadow-xl rounded-md  w-[400px] h-[500px]">
+                    <div class="  border-2 border-b-2 border-gray-700 bg-gray-900 hover:shadow-xl rounded-md w-72  sm:w-[400px] h-[500px]">
                         <div class="h-0 flex justify-between">
                             <p class=" text-gray-200 font-semibold mx-5 py-3">Card {{ currentCard + 1 }} of {{ cards.length }}</p>
                             <p class=" text-gray-200 font-semibold mx-5 py-3">Time elapsed: {{ secondsTaken }}</p>
@@ -211,6 +211,34 @@ const stopTimer = () => {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+#card-details {
+    @media screen and (max-width: 640px) {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        
+        
+    }
+}
+
+#review-modal {
+    @media screen and (max-width: 640px) {
+        
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+       
+        
+        
+    }
+    z-index: 1000;
 }
 
 

@@ -48,9 +48,9 @@ console.log(page.props);
 
 <AuthenticatedLayout>
 <div class="mt-5"></div>
-    <div class=" flex justify-between mx-2">
+    <div class=" flex flex-col sm:flex-row justify-center items-center sm:justify-between mx-2">
         <Link href="/dashboard" class=" button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Back to Card Creator</Link>
-        <button @click="toggleDeckCreateModal" class=" mr-3 button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Create a New Deck</button>
+        <button @click="toggleDeckCreateModal" class=" mt-3 sm:mt-0 sm:mr-3 button border text-center md:self-start rounded-lg px-2 bg-zinc-950 hover:bg-slate-900 text-white ml-3 py-2 w-48 whitespace-nowrap">Create a New Deck</button>
     </div>
     <DeckCreateModal class="relative top-56" :modalVisible="modalVisible" />
     <div class="md:grid md:grid-cols-3 pb-16 md:pb-0">
@@ -111,6 +111,20 @@ console.log(page.props);
 </template>
 
 <style>
+
+#popup-modal {
+    @media screen and (max-width: 640px) {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        
+        
+    }
+  z-index: 1000;
+}
 
 .v-enter-active,
 .v-leave-active {
