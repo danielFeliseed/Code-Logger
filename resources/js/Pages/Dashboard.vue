@@ -1,10 +1,4 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
-import Post from '../Components/Post.vue';
-import StatusCommentBox from '../Components/StatusCommentBox.vue';
-import hljs from 'highlight.js';
-import CodeEditor from 'simple-code-editor';
 import StatsGraph from '../Components/StatsGraph.vue';
 import CardForm from '../Components/CardForm.vue';
 
@@ -19,9 +13,9 @@ const props = defineProps({
 </script>
 
 <template>
-   <Head title="Home" />
+  
 
-   <AuthenticatedLayout>
+  
 
       <div class=" w-full flex flex-col items-center md:items-stretch md:mx-8">
 
@@ -35,6 +29,6 @@ const props = defineProps({
          
       </div>
 
-</AuthenticatedLayout>
+
 </template>
 
