@@ -46,23 +46,38 @@ class DeckController extends Controller
 
     public function store(Request $request)
     {
+        \Log::info($request->all());
 
         $request->validate([
             'name' => 'required',
             'category_id' => 'required',
+            // if a card is being created at the same time as a deck
+            'front' => 'nullable',
+            'back' => 'nullable',
             
         ]);
-        $decks = Deck::create([
+        $deck = Deck::create([
             'user_id' => $request->user()->id,
             'name' => $request->name,
-            'description' => $request->description,
-            'color' => $request->color,
+            'description' => $request->description ?? null,
+            'color' => $request->color ?? null,
             'category_id' => $request->category_id,
         ]);
-        return to_route('decks.show', $decks->id);
-        return to_route('decks', $decks->id);
-        
 
+        if ($request->has(['front', 'back'])) {
+            try {
+                $card = Card::create([
+                    'front' => $request->front,
+                    'back' => $request->back,
+                    'deck_id' => $deck->id,
+                    'user_id' => $request->user()->id,
+                ]);
+            } catch (\Exception $e) {
+                \Log::error('Error creating card: ' . $e->getMessage());
+            }
+        }
+
+        return to_route('decks.show', $deck->id);
     }
 
     public function edit($deck)

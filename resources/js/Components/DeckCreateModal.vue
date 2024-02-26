@@ -1,14 +1,37 @@
 <script setup>
 import Decks from '@/Pages/Decks.vue';
 import {useForm, usePage} from '@inertiajs/vue3';
+import { defineProps, defineEmits, watch } from 'vue';
+
+const props = defineProps({
+    name: String,
+    color: String,
+    category: String,
+    description: String,
+    modalVisible: {
+        type: Boolean,
+        default: false
+    },
+    form: Object,
+});
+
+
 
 const form = useForm({
     name: '',
     color: '',
     category_id: '',
-    description: ''
+    description: '',
+    // Initialize with default values
+    front: '',
+    back: '',
+    deck_id: '',
 });
 const page = usePage();
+
+
+
+const emit = defineEmits(['deckCreated']);
 
 const postDeck = () => {
     if (form.name === '' || form.color === '' || form.category_id === '' || form.description === '') {
@@ -16,9 +39,13 @@ const postDeck = () => {
         return;
     }
     form.post(route('decks.store'), {
-        onSuccess: () => {
-            console.log("Deck posted");
-            form.reset();
+        onSuccess: (response) => {
+        console.log("Full response:", response);
+        const newDeckId = response.data?.id;
+            emit('deckCreated', { id: newDeckId });
+        form.reset();
+            
+            console.log("Request data:", form);
             
         },
         onError: () => {
@@ -33,20 +60,21 @@ const closeModal = () => {
     const modal = document.getElementById('crud-modal')
     modal.hidden = !modal.hidden;
     
+    
 }
 
-const props = defineProps({
-    name: String,
-    color: String,
-    category: String,
-    description: String,
-    modalVisible: {
-        type: Boolean,
-        default: false
-    }
+
+
+if (props?.form) {
+watch(() => props.form, (newForm) => {
+    form.front = newForm?.front;
+    form.back = newForm?.back;
+    form.deck_id = newForm?.deck_id;
+}, {
+    deep: true, // Use deep watch to detect nested changes
+    immediate: true, // Run immediately to initialize with current prop values
 });
-
-
+}
 </script>
 
 <template>
@@ -61,7 +89,7 @@ const props = defineProps({
                 <h3 class=" text-sm sm:text-lg font-semibold text-gray-900 dark:text-white">
                     Create New Deck
                 </h3>
-                <button @click="closeModal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                <button @click="closeModal()"  type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
@@ -97,6 +125,7 @@ const props = defineProps({
                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                     Add new deck
                 </button>
+                <!-- <button @click="$emit('deckCreated', { id: 'test' })">Test Emit</button> -->
             </form>
         </div>
     </div>

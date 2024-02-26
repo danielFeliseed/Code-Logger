@@ -10,12 +10,22 @@ const form = useForm({
 });
 const page = usePage();
 const decks = ref(page.props.decks);
+
 const drawerVisible = ref(false);
 const modalVisible = ref(false);
 
+const handleDeckCreated = (deck) => {
+   console.log("handleDeckCreated triggered", deck);
+   // Now using tempCard for card data, ensure deckId is correctly obtained
+   postCard(deck.id);
+   toggleModal();
+}
+
 const postCard = (deckId) => {
-      form.deck_id = deckId;
-      console.log(form.deck_id);
+      if (form.front === '' || form.back === '' || form.deck_id === '') {
+         alert("Please fill in all fields and choose a deck");
+         return;
+      }
     form.post(route('cards.store'), {
         onSuccess: () => {
             console.log("Card posted");
@@ -37,7 +47,10 @@ const toggleModal = () => {
       drawerVisible.value = false;
    }
    modalVisible.value = !modalVisible.value;
+  
 }
+
+
 
 </script>
 
@@ -62,7 +75,7 @@ const toggleModal = () => {
                   </button>
          </div>
       </div>
-      <DeckCreateModal class=" sticky sm:relative top-0 bottom-56" :modalVisible="modalVisible" />
+      <DeckCreateModal class=" sticky sm:relative top-0 bottom-56" :form="form" :modalVisible="modalVisible" @deckCreated="handleDeckCreated" />
       
       <div id="drawer-swipe"
             :class="{'translate-y-full': !drawerVisible, 'fixed z-40 w-full overflow-y-auto border-t border-gray-200 rounded-t-lg dark:border-gray-700 bg-slate-950 transition-transform bottom-0 left-0 right-0': true}"
