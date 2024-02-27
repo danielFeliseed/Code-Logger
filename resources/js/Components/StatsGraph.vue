@@ -1,14 +1,20 @@
 <script setup>
 import { ref } from 'vue';
 import ApexCharts from 'apexcharts';
+import { onMounted } from 'vue';
 
-const progressGraph = ref(false);
+let weeklyStatsDropdown = ref(false);
 
-const toggleProgressGraph = () => {
-    progressGraph.value = !progressGraph.value;
+const toggleWeeklyStatsDropdown = () => {
+    weeklyStatsDropdown.value = !weeklyStatsDropdown.value;
 }
 
-window.addEventListener("load", function() {
+const getChartOptions = () => {
+  return {
+    series: [cardsStudiedToday, cardsNotStudiedToday, cardsAddedToday],
+  }
+}
+onMounted(() => {
     const getChartOptions = () => {
         return {
           series: [90, 85, 70],
@@ -77,7 +83,7 @@ window.addEventListener("load", function() {
 
 <template>
    
-    <div class="max-w-sm w-full h-[590px] bg-slate-950 rounded-xl shadow  p-4 md:p-6">
+  <div class="max-w-sm w-full h-[590px] bg-slate-950 rounded-xl shadow mb-20 sm:mb-0  p-4 md:p-6">
     <div class="flex justify-between mb-3">
         <div class="flex items-center">
         <div class="flex justify-center items-center">
@@ -116,38 +122,16 @@ window.addEventListener("load", function() {
             <dd class="text-blue-600 dark:text-blue-300 text-sm font-medium">Done</dd>
         </dl>
         </div>
-
-        <button @click.prevent="toggleProgressGraph()"  data-collapse-toggle="more-details" type="button" class='hover:underline text-xs text-gray-500 dark:text-gray-400 font-medium inline-flex items-center'>Show more details <svg class="w-2 h-2 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-        </svg>
-        </button>
-        <div  id="more-details" class="border-gray-200 border-t dark:border-gray-600 pt-3 mt-3 space-y-2 hidden">
-        <dl class="flex items-center justify-between">
-            <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal">Average task completion rate:</dt>
-            <dd class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-green-900 dark:text-green-300">
-            <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-            </svg> 57%
-            </dd>
-        </dl>
-        <dl class="flex items-center justify-between">
-            <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal">Days until sprint ends:</dt>
-            <dd class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-gray-600 dark:text-gray-300">13 days</dd>
-        </dl>
-        <dl class="flex items-center justify-between">
-            <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal">Next meeting:</dt>
-            <dd class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-gray-600 dark:text-gray-300">Thursday</dd>
-        </dl>
-        </div>
     </div>
 
     <!-- Radial Chart -->
-    <div class="py-6" id="radial-chart"></div>
+    <div class="" id="radial-chart"></div>
 
     <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
-        <div class="flex justify-between items-center pt-5">
+        <div class="flex justify-between items-center pt-2">
         <!-- Button -->
         <button
+            @click="toggleWeeklyStatsDropdown()"
             id="dropdownDefaultButton"
             data-dropdown-toggle="lastDaysdropdown"
             data-dropdown-placement="bottom"
@@ -158,8 +142,8 @@ window.addEventListener("load", function() {
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
             </svg>
         </button>
-        <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+        <div v-show="weeklyStatsDropdown" id="dropdownBottomButton" data-dropdown-toggle="dropdownBottom" data-dropdown-placement="bottom" class="z-10 absolute right-40  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 " aria-labelledby="dropdownDefaultButton">
                 <li>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
                 </li>
@@ -177,17 +161,19 @@ window.addEventListener("load", function() {
                 </li>
             </ul>
         </div>
-        <a
+        <button
             href="#"
-            class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-white hover:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
-            Progress report
+            disabled
+            
+            class="uppercase hover:cursor-not-allowed bg-gray-400 text-sm font-semibold inline-flex items-center rounded-lg text-white hover:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
+            Coming soon😎
             <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
             </svg>
-        </a>
+          </button>
         </div>
     </div>
-    </div>
+  </div>
 
 </template>
 
