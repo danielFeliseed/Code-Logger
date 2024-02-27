@@ -111,14 +111,14 @@ const stopTimer = () => {
         <!--Card Details Modal-->
         <Transition :duration="{enter: 550, leave:550}" >
         <div v-show="showCardDetails" id="card-details" class=" z-50 absolute top-20 right-0 left-0 flex justify-center mt-16">
-            <div  class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-10 text-center bg-slate-950 sm:w-[450px]" >
+            <div  class=" flex flex-col gap-4 border rounded-lg items-center pt-10 pb-5 px-5 sm:px-10 text-center bg-slate-950 sm:w-[450px]" >
                 <h1 class="text-3xl text-gray-200">Card details</h1>
                 <label class=" text-gray-200 font-semibold text-lg" for="card-front">Front of card</label>
                 <div class=" text-gray-200 sm:w-[400px] border rounded-lg py-3 px-3 bg-black" style="white-space: pre-wrap;">
                     {{ cardDetailsToBeShown.front }}
                 </div>
                 <label class="text-gray-200 font-semibold text-lg" for="card-back">Back of card</label>
-                <div class=" text-gray-200  sm:w-[400px] border rounded-lg py-3 px-3 text-left bg-black" style="white-space: pre-wrap;">
+                <div class=" text-gray-200 overflow-y-scroll max-h-[300px]  sm:w-[400px] border rounded-lg py-3 px-3 text-left bg-black" style="white-space: pre-wrap;">
                     {{ cardDetailsToBeShown.back }}
                 </div>
                 <div>
@@ -197,7 +197,7 @@ const stopTimer = () => {
 }
 
 .slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+ {
     transform: translateX(10px);
     opacity: 0;
     position: absolute;
@@ -240,18 +240,5 @@ const stopTimer = () => {
     }
     z-index: 1000;
 }
-
-
-/* #next-card-button {
-    background: linear-gradient(to right, #2b2b2b 50%, #030016 50%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-    transition: all 1s ease-out;
-}
-
-#next-card-button:hover {
-    background-position: left bottom;
-} */
-
 
 </style>
