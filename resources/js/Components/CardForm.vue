@@ -16,7 +16,6 @@ const modalVisible = ref(false);
 
 const handleDeckCreated = (deck) => {
    console.log("handleDeckCreated triggered", deck);
-   // Now using tempCard for card data, ensure deckId is correctly obtained
    postCard(deck.id);
    toggleModal();
 }

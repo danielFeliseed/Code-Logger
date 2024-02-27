@@ -2,6 +2,16 @@
 import { ref } from 'vue';
 import ApexCharts from 'apexcharts';
 import { onMounted } from 'vue';
+import { usePage} from '@inertiajs/vue3';
+
+const page = usePage();
+console.log(page.props);
+
+const props = defineProps({
+    cardsStudiedToday: Number,
+    cardsNotStudiedToday: Number,
+    cardsAddedToday: Number,
+});
 
 let weeklyStatsDropdown = ref(false);
 
@@ -9,11 +19,8 @@ const toggleWeeklyStatsDropdown = () => {
     weeklyStatsDropdown.value = !weeklyStatsDropdown.value;
 }
 
-const getChartOptions = () => {
-  return {
-    series: [cardsStudiedToday, cardsNotStudiedToday, cardsAddedToday],
-  }
-}
+// TODO: i need to work on the reviews table in the database and connect it to the card review page and the stats graph
+
 onMounted(() => {
     const getChartOptions = () => {
         return {
