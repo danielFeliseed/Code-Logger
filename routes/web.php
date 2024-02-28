@@ -72,6 +72,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard', [DeckController::class, 'store'])->name('decks.store');
     Route::post('/cards/store', [CardController::class, 'store'])->name('cards.store');
 });
+    // Community Page
+    Route::get('community', [ShareDecksAndCardsController::class, 'index'])->name('community');
+    Route::get('community/{deck}', [ShareDecksAndCardsController::class, 'show'])->name('community.show');
+    Route::post('community', [ShareDecksAndCardsController::class, 'store'])->name('community.store');
+    Route::delete('community/{deck}', [ShareDecksAndCardsController::class, 'destroy'])->name('community.destroy');
 
 require __DIR__.'/auth.php';
 
