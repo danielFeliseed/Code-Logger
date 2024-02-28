@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
@@ -71,12 +72,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/decks/{deck}', [DeckController::class, 'show'])->name('decks.show');
     Route::post('/dashboard', [DeckController::class, 'store'])->name('decks.store');
     Route::post('/cards/store', [CardController::class, 'store'])->name('cards.store');
-});
+
     // Community Page
-    Route::get('community', [ShareDecksAndCardsController::class, 'index'])->name('community');
-    Route::get('community/{deck}', [ShareDecksAndCardsController::class, 'show'])->name('community.show');
-    Route::post('community', [ShareDecksAndCardsController::class, 'store'])->name('community.store');
-    Route::delete('community/{deck}', [ShareDecksAndCardsController::class, 'destroy'])->name('community.destroy');
+    Route::get('/community', [CommunityController::class, 'index'])->name('community');
+});
+    
+    // Route::get('community/{deck}', [ShareDecksAndCardsController::class, 'show'])->name('community.show');
+    // Route::post('community', [ShareDecksAndCardsController::class, 'store'])->name('community.store');
+    // Route::delete('community/{deck}', [ShareDecksAndCardsController::class, 'destroy'])->name('community.destroy');
 
 require __DIR__.'/auth.php';
 

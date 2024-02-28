@@ -42,6 +42,10 @@ const page = usePage();
                                 <NavLink class=" text-white" :href="route('decks')" :active="route().current('decks.index')">
                                     Decks
                                 </NavLink>
+                                <NavLink class=" text-white" :href="route('community')" :active="route().current('community')">
+                                    Community
+                                </NavLink>
+                                
                             </div>
                         </div>
 
