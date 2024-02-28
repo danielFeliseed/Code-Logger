@@ -42,6 +42,9 @@ const page = usePage();
                                 <NavLink class=" text-white" :href="route('decks')" :active="route().current('decks.index')">
                                     Decks
                                 </NavLink>
+                                <button disabled class=" text-white text-md hover:cursor-not-allowed hover:text-gray-500">
+                                    Community (Coming Soon)
+                                </button>
                             </div>
                         </div>
 
