@@ -37,7 +37,7 @@ watch(clickedDeck, (newValue, oldValue) => {
             <div class=" flex flex-col items-center gap-2">
                 <p class=" font-semibold">{{ clickedDeck?.description }}</p>
                 <p class="font-semibold">Example cards from {{ clickedDeck?.name }}</p>
-                <div v-if="clickedDeck.cards.length > 0" v-for="card in clickedDeck?.cards.slice(0,2)" class="border rounded-md px-2 py-2 self-start w-full">{{ card.front }} <br>{{ card.back }}</div>
+                <div v-if="clickedDeck?.cards.length > 0" v-for="card in clickedDeck?.cards.slice(0,2)" class="border rounded-md px-2 py-2 self-start w-full">{{ card.front }} <br>{{ card.back }}</div>
                 <div v-else class=" border-t pt-3 self-center mt-5 text-center w-full font-semibold text-xl">There are no cards in this deck</div>
             </div>
             <div class="modal-action flex justify-center items-center">
