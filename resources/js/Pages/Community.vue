@@ -42,19 +42,19 @@ watch(clickedDeck, (newValue, oldValue) => {
             </div>
             <div class="modal-action flex justify-center items-center">
             <form method="dialog">
-                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn mr-2">Add deck</button>
                 <button class="btn self-center">Close</button>
             </form>
             </div>
         </div>
         </dialog>
-        <h2 class=" text-gray-200 text-xl mt-5 mb-3">Decks Shared by Others</h2>
-        <div class="carousel carousel-center max-w-3xl p-4 bg-slate-900 space-x-4 rounded-box">
+        <h2 class=" text-gray-200 text-xl mt-5 mb-3 self-end mr-14">Decks Shared by Others</h2>
+        <div class="carousel h-[600px] carousel-vertical max-w-3xl p-4 bg-slate-900 rounded-box flex flex-col self-end items-center gap-3">
             <div v-for="deck in decks" :key="deck.id" class="carousel-item">
                 <div :style="{backgroundColor: deck.color}"  class=" rounded-box text-center hover:shadow-2xl hover: flex flex-col gap-14 border border-base-content shadow-md h-56 w-[300px] bg-base-100">
                     <div class="flex justify-between">
                         <span class="mt-1 self-start mx-2">Daniel Fenster</span>
-                        <button @click="addClickedDeck(deck.id)" onclick="my_modal_5.showModal()" class=" mr-2 px-1 py-1 rounded-md mt-2 ">
+                        <button @click="addClickedDeck(deck.id)" onclick="my_modal_5.showModal()" class=" hover:bg-black mr-2 px-1 py-1 rounded-md mt-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                             <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
@@ -88,5 +88,3 @@ watch(clickedDeck, (newValue, oldValue) => {
     </div>
     </AuthenticatedLayout>
   </template>
-
-

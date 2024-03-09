@@ -13,6 +13,11 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Http\Controllers\DashboardController;
+use App\Models\Deck;
+use App\Models\Post;
+use App\Models\Card;
+
 
 
 /*
@@ -55,7 +60,7 @@ Route::get('/auth/google/callback', function () {
 Route::get('/auth/redirect', [AuthenticatedSessionController::class, 'redirectToProvider'])->name('login.google');
 
 
-Route::get('/dashboard', [PostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
