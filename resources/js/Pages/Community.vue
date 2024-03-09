@@ -1,12 +1,24 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { usePage } from '@inertiajs/vue3';
+import { ref, watch } from 'vue';
 
 
 const page = usePage();
 const decks = page.props.decks;
-console.log(page.props);
-console.log(decks);
+
+const clickedDeck = ref(null);
+
+function addClickedDeck(id) {
+    const deck = decks.find(d => d.id == id);
+    clickedDeck.value = deck;
+}
+
+watch(clickedDeck, (newValue, oldValue) => {
+  console.log('clickedDeck changed:', newValue);
+}, { deep: true });
+
+
 
 </script>
 
@@ -19,11 +31,36 @@ console.log(decks);
     <!-- And below the posts that are not shared decks are below that (eventually i want to have a real code editor for the posts)-->
     <div class=" text-gray-200 min-h-screen flex flex-col items-center ">
 
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box sm:max-h-[550px]">
+            <h3 class="font-bold text-lg mt-3">{{ clickedDeck?.name }}</h3>
+            <div class=" flex flex-col items-center gap-2">
+                <p class=" font-semibold">{{ clickedDeck?.description }}</p>
+                <p class="font-semibold">Example cards from {{ clickedDeck?.name }}</p>
+                <div v-if="clickedDeck.cards.length > 0" v-for="card in clickedDeck?.cards.slice(0,2)" class="border rounded-md px-2 py-2 self-start w-full">{{ card.front }} <br>{{ card.back }}</div>
+                <div v-else class=" border-t pt-3 self-center mt-5 text-center w-full font-semibold text-xl">There are no cards in this deck</div>
+            </div>
+            <div class="modal-action flex justify-center items-center">
+            <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn self-center">Close</button>
+            </form>
+            </div>
+        </div>
+        </dialog>
         <h2 class=" text-gray-200 text-xl mt-5 mb-3">Decks Shared by Others</h2>
         <div class="carousel carousel-center max-w-3xl p-4 bg-slate-900 space-x-4 rounded-box">
-            <div v-for="deck in decks" class="carousel-item">
+            <div v-for="deck in decks" :key="deck.id" class="carousel-item">
                 <div :style="{backgroundColor: deck.color}"  class=" rounded-box text-center hover:shadow-2xl hover: flex flex-col gap-14 border border-base-content shadow-md h-56 w-[300px] bg-base-100">
-                    <span class="mt-1 self-start mx-2">Daniel Fenster</span>
+                    <div class="flex justify-between">
+                        <span class="mt-1 self-start mx-2">Daniel Fenster</span>
+                        <button @click="addClickedDeck(deck.id)" onclick="my_modal_5.showModal()" class=" mr-2 px-1 py-1 rounded-md mt-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                            </svg>
+                        </button>
+                    </div>
                     <span class=" self-center text-center justify-center font-extrabold text-3xl">{{ deck.name }}</span>
                     <div class="flex flex-row justify-between border-t px-2 py-1">
                         <span class="flex gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history mt-1" viewBox="0 0 16 16">
@@ -42,51 +79,12 @@ console.log(decks);
                     </div>
                 </div>
             </div> 
-            <!-- <div class="carousel-item">
-                <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg" class="rounded-box" />
-            </div> 
-            <div class="carousel-item">
-                <img src="https://daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg" class="rounded-box" />
-            </div> 
-            <div class="carousel-item">
-                <img src="https://daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg" class="rounded-box" />
-            </div> 
-            <div class="carousel-item">
-                <img src="https://daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" class="rounded-box" />
-            </div> 
-            <div class="carousel-item">
-                <img src="https://daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg" class="rounded-box" />
-            </div> 
-            <div class="carousel-item">
-                <img src="https://daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
-            </div> -->
         </div>
 
       <!-- Posts Section -->
-      <div class="max-w-4xl mx-auto p-4">
-        <div class="mb-8">
-          <!-- New Post Form -->
-          <div class="mb-6">
-            <textarea v-model="newPostContent" class="w-full p-2 bg-gray-800 text-gray-200" placeholder="Share something..."></textarea>
-            <button @click="submitPost" class="mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded">Post</button>
-          </div>
-          <!-- Post List -->
-          <div v-for="(post, index) in posts" :key="index" class="mb-4 p-4 bg-gray-800 rounded">
-            <div class="font-bold">{{ post.user.name }} <span class="text-sm text-gray-400">{{ post.createdAt }}</span></div>
-            <p class="mt-2">{{ post.content }}</p>
-            <!-- Comments -->
-            <div v-for="comment in post.comments" :key="comment.id" class="ml-4 mt-4 border-l-2 border-blue-500 pl-2">
-              <div class="text-sm">{{ comment.user.name }} <span class="text-xs text-gray-400">{{ comment.createdAt }}</span></div>
-              <p class="text-sm mt-1">{{ comment.content }}</p>
-            </div>
-            <!-- Add Comment Form -->
-            <div class="mt-4">
-              <textarea v-model="commentContent" class="w-full p-2 bg-gray-700 text-gray-200 text-sm" placeholder="Add a comment..."></textarea>
-              <button @click="submitComment(post)" class="mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm">Comment</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      
+        
+      
     </div>
     </AuthenticatedLayout>
   </template>
