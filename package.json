@@ -27,6 +27,8 @@
         "@inertiajs/inertia-vue3": "^0.6.0",
         "apexcharts": "^3.45.2",
         "bootstrap": "^5.3.2",
+        "bootstrap-icons": "^1.11.3",
+        "bootstrap-icons-vue": "^1.11.3",
         "bootstrap-vue": "^2.23.1",
         "codemirror": "^5.65.16",
         "codemirror-editor-vue3": "^2.4.1",

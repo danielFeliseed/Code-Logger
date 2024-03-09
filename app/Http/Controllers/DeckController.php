@@ -13,7 +13,7 @@ class DeckController extends Controller
 {
     public function index()
     {
-        $decks = Deck::with('cards')->get();
+        $decks = Deck::with('cards', 'user')->get();
         return Inertia::render('Decks', [
             'decks' => auth()->user()->decks,
             'user' => auth()->user(),

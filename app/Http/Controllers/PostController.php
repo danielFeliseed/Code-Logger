@@ -15,10 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['comments','user', 'comments.user'])->get();
-        return Inertia::render('Dashboard', [
+        $posts = Post::with(['user'])->get();
+        return Inertia::render('Community', [
             'posts' => $posts,
             'user' => auth()->user(),
+            'decks' => auth()->user()->decks()->with('cards')->get(),
         ]);
      }
 

@@ -12,6 +12,7 @@ class ShareDecksAndCardsController extends Controller
      */
     public function index()
     {
+        $posts = ShareDecksAndCardsModel::all();
         
     }
 

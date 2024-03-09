@@ -14,11 +14,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         inertia::share('decks', function () {
-            return auth()?->user()?->decks?->load('cards');
+            return auth()?->user()?->decks?->load(['cards', 'user']);
         });
 
         inertia::share('user', function () {
-            return auth()?->user();
+            return auth()?->user()?->load('decks');
         });
         
     }
