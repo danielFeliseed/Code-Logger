@@ -124,7 +124,7 @@ watch(clickedDeck, (newValue, oldValue) => {
                     <h2 class=" text-gray-200 text-xl mt-5 mb-3 self-end mr-14">Decks Shared by Others</h2>
                     <div
                         class="carousel max-h-[700px] carousel-vertical max-w-3xl p-4 bg-slate-950 rounded-box flex flex-col self-end items-center gap-3">
-                        <div v-for="deck in decks" :key="deck.id" class="carousel-item">
+                        <div v-for="deck in decks" :key="deck.id" class="carousel-item pt-3">
                             <div :style="{ backgroundColor: deck.color }"
                                 class=" rounded-box text-center hover:shadow-2xl hover: flex flex-col gap-14 border border-base-content shadow-md h-56 w-[300px] bg-base-100">
                                 <div class="flex justify-between">
